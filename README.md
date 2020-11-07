@@ -1,6 +1,6 @@
 # among-us-friends
 
-I use this to track the performance of players in the Among Us games I play with my friends.
+I use this to track the performance of players in the Among Us games I play with my friends!
 
 There is a provisional ELO system, and graphs powered by Chart.js. The backend is an Node/Express app.
 
@@ -14,7 +14,9 @@ The data source is a Google Sheets file where I store the crew names, imposter n
 
 <br>
 
-We connect via the Sheets API (v4).
+This is easy for me to update when we play multiple games with the same lobby as I can clone the rows.
+
+The data is brought into the application through the Sheets API (v4).
 
 ## Setup
 
@@ -26,6 +28,8 @@ Set two enviromental variables.
 `npm i`
 
 `npm run start`
+
+Visit `/`
 
 ## Deployment
 
