@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  padding-top: 5rem;
+  margin: 2em 1em;
+  line-height: 1.5em;
+}
+
+h1 {
+  font-style: italic;
+  color: #373fff;
+}
+
+.player {
+  display: inline-block;
+}
+
+.player > h5 {
+  text-align: center;
+}
+
+.player > ul {
+  padding-left: 0;
+}
+
+.player-graph {
+  display: inline-block;
+}
+
+canvas {
+  position: relative;
+  top: 38px;
+  left: 32px;
+}
+
+main {
+  padding: 3rem 1.5rem;
+}
+
+footer {
+  padding-bottom: 5rem;
+}
+
+@media only screen and (max-width: 414px) {
+  canvas {
+    top: 0;
+    left: 0;
+  }
+}
