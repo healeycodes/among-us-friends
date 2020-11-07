@@ -30,6 +30,10 @@ h1 {
   display: inline-block;
 }
 
+#stats {
+  padding-left: 0;
+}
+
 canvas {
   position: relative;
   top: 38px;

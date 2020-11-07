@@ -1,3 +1,7 @@
+.glitch-assets
+.wget-hsts
+shrinkwrap.yaml
+
 # Logs
 logs
 *.log
