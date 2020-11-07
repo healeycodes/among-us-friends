@@ -6,9 +6,13 @@ There is a provisional ELO system, and graphs powered by Chart.js. The backend i
 
 ![Win rates and loss rates, and an ELO graph, for three players](https://github.com/healeycodes/among-us-friends/blob/main/public/preview.png)
 
+<br>
+
 The data source is a Google Sheets file where I store the crew names, imposter names, and the winner (crew/imposter).
 
 ![A Google Sheets file](https://github.com/healeycodes/among-us-friends/blob/main/public/sheets.png)
+
+<br>
 
 We connect via the Sheets API (v4).
 
