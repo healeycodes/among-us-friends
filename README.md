@@ -29,7 +29,7 @@ Set two enviromental variables.
 
 `npm run start`
 
-Visit `/`
+Visit `/` in a browser!
 
 ## Deployment
 
