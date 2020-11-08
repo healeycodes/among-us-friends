@@ -1,3 +1,5 @@
+![Node.js CI](https://github.com/healeycodes/among-us-friends/workflows/Node.js%20CI/badge.svg)
+
 # among-us-friends
 
 I use this to track the performance of players in the Among Us games I play with my friends!
