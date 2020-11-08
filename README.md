@@ -14,9 +14,35 @@ The data source is a Google Sheets file where I store the crew names, imposter n
 
 ![A Google Sheets file](https://github.com/healeycodes/among-us-friends/blob/main/public/sheets.png)
 
+Enter data starting at C4 downwards. The rows should be 13 cells long.
+
+10 player slots (which should be left empty if you have less than 10), 2 slots for the imposters (the names are repeated from the player list), and a final slot for the winner ('crew' or 'imposter').
+
+E.g. 
+
+```
+"andy" -- player list
+"ally"
+"bayf"
+"beans"
+"keita"
+"mads"
+"roma"
+"spon"
+"gem"
+"" <-- empty if you have nine players
+
+"ally" -- imposters
+"spon"
+
+"crew" <-- game winner
+```
+
+See the above image for clarification.
+
 <br>
 
-This is easy for me to update when we play multiple games with the same lobby as I can clone the rows.
+This setup is easy for me to update when we play multiple games with the same lobby as I can clone the rows.
 
 The data is brought into the application through the Sheets API (v4).
 
