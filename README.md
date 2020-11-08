@@ -4,7 +4,7 @@
 
 I use this to track the performance of players in the Among Us games I play with my friends!
 
-There is a provisional ELO system, and graphs powered by Chart.js. The backend is an Node/Express app.
+There is a provisional ELO system, and graphs powered by Chart.js. The backend is an Node/Express app, tested by Jest.
 
 ![Win rates and loss rates, and an ELO graph, for three players](https://github.com/healeycodes/among-us-friends/blob/main/public/preview.png)
 
@@ -18,7 +18,7 @@ Enter data starting at C4 downwards. The rows should be 13 cells long.
 
 10 player slots (which should be left empty if you have less than 10), 2 slots for the imposters (the names are repeated from the player list), and a final slot for the winner ('crew' or 'imposter').
 
-E.g. 
+E.g.
 
 ```
 "andy" -- player list
@@ -58,6 +58,10 @@ Set two enviromental variables.
 `npm run start`
 
 Visit `/` in a browser!
+
+## Tests
+
+`npm test`
 
 ## Deployment
 

@@ -9,7 +9,7 @@ function generatePlayerGraph(player) {
       datasets: [
         {
           label: "ELO",
-          data: player.eloHistory.map(e => Number(e)),
+          data: player.eloHistory.map(e => e),
           fill: false,
           borderColor: "rgb(75, 192, 192)",
           lineTension: 0.1
@@ -59,10 +59,9 @@ fetch("/stats")
           ? `<li>👹&nbsp;&nbsp;win ${imposterWin}, loss ${imposterLoss}, win rate of ${imposterWinRate}%</li>`
           : "";
 
+      const elo = player.eloHistory.length <= 10 ? "~" : player.elo;
       newListItem.innerHTML = `<div class="player">
-  <h5>${player.name} <small>(<code>${
-        player.eloHistory.length <= 10 ? "~" : player.elo
-      }</code>)</small></h5>
+  <h5>${player.name} <small>(<code>${elo}</code>)</small></h5>
   <ul style="list-style-type: none; padding-bottom: 1em;">
     ${crewText}
     ${imposterText}
