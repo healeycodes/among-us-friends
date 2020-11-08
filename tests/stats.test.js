@@ -38,7 +38,6 @@ describe("Test buildStats", () => {
 
     expect(eloHistory.length).toBe(3);
     eloHistory.forEach(elo => expect(typeof elo).toBe('number'));
-
     done();
   });
 });
