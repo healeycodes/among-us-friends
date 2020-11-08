@@ -18,13 +18,13 @@ describe("Test buildStats", () => {
     expect(stats).toHaveProperty('games');
 
     const firstPlayer = stats.players[0];
-    expect(firstPlayer).toHaveProperty('crewLoss');
-    expect(firstPlayer).toHaveProperty('crewWin');
-    expect(firstPlayer).toHaveProperty('elo');
-    expect(firstPlayer).toHaveProperty('eloHistory');
-    expect(firstPlayer).toHaveProperty('imposterLoss');
-    expect(firstPlayer).toHaveProperty('imposterWin');
-    expect(firstPlayer).toHaveProperty('name');
+    expect(typeof firstPlayer.crewLoss).toBe('number')
+    expect(typeof firstPlayer.crewWin).toBe('number');
+    expect(typeof firstPlayer.elo).toBe('number');
+    expect(typeof firstPlayer.eloHistory.length).toBe('number');
+    expect(typeof firstPlayer.imposterLoss).toBe('number');
+    expect(typeof firstPlayer.imposterWin).toBe('number');
+    expect(typeof firstPlayer.name).toBe('string');
     done();
   });
 
