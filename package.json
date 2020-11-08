@@ -7,12 +7,15 @@
   "description": "An among us league for my friends.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "jest"
   },
   "dependencies": {
     "express": "^4.17.1",
     "node-fetch": "^2.6.1",
-    "elo-rank": "^1.0.4"
+    "elo-rank": "^1.0.4",
+    "supertest": "^6.0.0",
+    "jest": "^26.6.2"
   },
   "engines": {
     "node": "12.x"
