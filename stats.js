@@ -106,4 +106,4 @@ function buildStats(data) {
   return { players: playersSortedByElo, games };
 }
 
-module.exports = { buildStats };
+module.exports = { buildStats, eloCalc };
