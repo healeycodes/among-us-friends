@@ -111,6 +111,7 @@ function buildStats(data) {
   playersSortedByElo = playersSortedByElo
     .filter(p => p.eloHistory.length > PLACEMENT_GAMES)
     .concat(placements);
+  
   return { players: playersSortedByElo };
 }
 
