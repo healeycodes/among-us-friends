@@ -25,18 +25,19 @@
       defer
     ></script>
     <script src="/graph.js" defer></script>
-    <script src="/stats.js" defer></script>
+    <script src="/player.js" defer></script>
   </head>
   <body>
     <header class="container">
-      <h1>Among Us League - Season One</h1>
+      <h1 id="player-title">Among Us League</h1>
     </header>
 
     <main class="container">
-      <section class="stats">
-        <ul id="stats">
-          <em>loading stats&hellip;</em>
-        </ul>
+      <div class="single-graph">
+        <canvas></canvas>
+      </div>
+      <section class="player">
+        <em>loading player&hellip;</em>
       </section>
     </main>
 

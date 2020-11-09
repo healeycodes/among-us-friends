@@ -1,34 +1,5 @@
 const statsList = document.getElementById("stats");
 
-function generatePlayerGraph(player) {
-  const ctx = document.getElementById(player.name).getContext("2d");
-  const myLineChart = new window.Chart(ctx, {
-    type: "line",
-    data: {
-      labels: player.eloHistory.map(() => ""), // required
-      datasets: [
-        {
-          label: "ELO",
-          data: player.eloHistory.map(e => e),
-          fill: false,
-          borderColor: "rgb(75, 192, 192)",
-          lineTension: 0.1
-        }
-      ]
-    },
-    options: {
-      legend: {
-        display: false
-      },
-      elements: {
-        point: {
-          radius: 0
-        }
-      }
-    }
-  });
-}
-
 fetch("/stats")
   .then(response => response.json())
   .then(json => {
@@ -61,7 +32,7 @@ fetch("/stats")
 
       const elo = player.eloHistory.length <= 10 ? "~" : player.elo;
       newListItem.innerHTML = `<div class="player">
-  <h5>${player.name} <small>(<code>${elo}</code>)</small></h5>
+  <h5><a href="/player/${player.name}">${player.name}</a> <small>(<code>${elo}</code>)</small></h5>
   <ul style="list-style-type: none; padding-bottom: 1em;">
     ${crewText}
     ${imposterText}
@@ -72,6 +43,6 @@ fetch("/stats")
 </div>`;
 
       statsList.appendChild(newListItem);
-      generatePlayerGraph(player);
+      window.generatePlayerGraph(player);
     }
   });

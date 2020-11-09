@@ -27,7 +27,6 @@ describe("Test the stats path", () => {
       .then(response => {
         expect(response.type).toEqual('application/json');
         expect(response.body).toHaveProperty('players');
-        expect(response.body).toHaveProperty('games');
         expect(response.statusCode).toBe(200);
         done();
       });

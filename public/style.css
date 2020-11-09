@@ -9,6 +9,11 @@ body {
   line-height: 1.5em;
 }
 
+a {
+  color: #373fff;
+  text-decoration: initial;
+}
+
 h1 {
   font-style: italic;
   color: #373fff;
@@ -30,11 +35,30 @@ h1 {
   display: inline-block;
 }
 
+.single-graph {
+  max-width: 500px;
+  height: 200px;
+  margin-bottom: 145px;
+}
+
 #stats {
   padding-left: 0;
 }
 
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+
+code {
+  font-style: normal;
+}
+
 canvas {
+  display: block;
   position: relative;
   top: 38px;
   left: 32px;
@@ -52,5 +76,8 @@ footer {
   canvas {
     top: 0;
     left: 0;
+  }
+  .single-graph {
+    margin-bottom: initial;
   }
 }
