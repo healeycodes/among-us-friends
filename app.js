@@ -5,7 +5,7 @@ const app = express();
 app.use(express.static("public"));
 const { buildStats, buildPlayer } = require("./stats");
 
-const LOG_FILE = "log.txt"
+const LOG_FILE = "log.txt";
 
 app.get("/", (request, response) => {
   log(request);
