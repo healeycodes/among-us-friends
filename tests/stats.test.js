@@ -15,7 +15,6 @@ describe("Test buildStats", () => {
   test("It should have the correct properties", done => {
     const stats = buildStats(mockSheetsData);
     expect(stats).toHaveProperty('players');
-    expect(stats).toHaveProperty('games');
 
     const firstPlayer = stats.players[0];
     expect(typeof firstPlayer.crewLoss).toBe('number')
@@ -31,7 +30,6 @@ describe("Test buildStats", () => {
   test("It should have sensible eloHistory", done => {
     const stats = buildStats(mockSheetsData);
     expect(stats).toHaveProperty('players');
-    expect(stats).toHaveProperty('games');
 
     const firstPlayer = stats.players[0];
     const eloHistory = firstPlayer.eloHistory;

@@ -2,7 +2,7 @@ const statsList = document.getElementById("stats");
 
 function generatePlayerGraph(player) {
   const ctx = document.getElementById(player.name).getContext("2d");
-  const myLineChart = new window.Chart(ctx, {
+  const playerGraph = new window.Chart(ctx, {
     type: "line",
     data: {
       labels: player.eloHistory.map(() => ""), // required

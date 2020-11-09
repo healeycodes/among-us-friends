@@ -31,7 +31,6 @@ function buildStats(data) {
 
   // Create empty players
   let players = {};
-  let games = data.values.length;
   // Search all games for unique players
   data.values.forEach(game =>
     game
@@ -103,7 +102,7 @@ function buildStats(data) {
   playersSortedByElo = playersSortedByElo
     .filter(p => p.eloHistory.length > PLACEMENT_GAMES)
     .concat(placements);
-  return { players: playersSortedByElo, games };
+  return { players: playersSortedByElo };
 }
 
 module.exports = { buildStats, eloCalc };
