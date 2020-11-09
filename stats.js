@@ -78,7 +78,7 @@ function buildStats(data) {
         player.elo += diff;
       }
       player.eloHistory.push(player.elo);
-      player.games.push({ crew: [...crew], imposters, winner, diff });
+      player.games.unshift({ crew: [...crew], imposters, winner, diff });
     });
 
     // Handle imposters
@@ -95,7 +95,7 @@ function buildStats(data) {
         player.elo += diff;
       }
       player.eloHistory.push(player.elo);
-      player.games.push({ crew: [...crew], imposters, winner, diff });
+      player.games.unshift({ crew: [...crew], imposters, winner, diff });
     });
   });
 

@@ -16,7 +16,7 @@ fetch("/stats")
     window.generatePlayerGraph(player);
 
     const gamesList = document.createElement("div");
-    player.games.reverse().forEach(game => {
+    player.games.forEach(game => {
       const gameElem = document.createElement("p");
       gameElem.classList.add("game-history");
       gameElem.innerHTML = `${
