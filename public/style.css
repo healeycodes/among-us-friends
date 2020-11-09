@@ -10,13 +10,12 @@ body {
 }
 
 a {
-  color: #373fff;
+  color: black;
   text-decoration: initial;
 }
 
 h1 {
   font-style: italic;
-  color: #373fff;
 }
 
 .player {
