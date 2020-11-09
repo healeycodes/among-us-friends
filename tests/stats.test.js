@@ -21,6 +21,15 @@ describe("Test buildStats", () => {
     expect(typeof firstPlayer.crewWin).toBe('number');
     expect(typeof firstPlayer.elo).toBe('number');
     expect(typeof firstPlayer.eloHistory.length).toBe('number');
+    expect(typeof firstPlayer.games.length).toBe('number');
+
+    const firstGame = firstPlayer.games[0]
+    expect(typeof firstGame.diff).toBe('number');
+    expect(typeof firstGame.crew.length).toBe('number');
+    expect(typeof firstGame.crew[0]).toBe('string');
+    expect(typeof firstGame.imposters.length).toBe('number');
+    expect(typeof firstGame.imposters[0]).toBe('string');
+
     expect(typeof firstPlayer.imposterLoss).toBe('number');
     expect(typeof firstPlayer.imposterWin).toBe('number');
     expect(typeof firstPlayer.name).toBe('string');

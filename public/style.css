@@ -9,12 +9,30 @@ body {
   line-height: 1.5em;
 }
 
+main {
+  padding: 3rem 1.5rem;
+}
+
+footer {
+  padding-bottom: 5rem;
+}
+
 a {
   text-decoration: initial;
 }
 
 h1 {
   font-style: italic;
+}
+
+code {
+  font-style: normal;
+}
+
+canvas {
+  position: relative;
+  top: 38px;
+  left: 32px;
 }
 
 .player {
@@ -49,24 +67,6 @@ h1 {
 
 .red {
   color: red;
-}
-
-code {
-  font-style: normal;
-}
-
-canvas {
-  position: relative;
-  top: 38px;
-  left: 32px;
-}
-
-main {
-  padding: 3rem 1.5rem;
-}
-
-footer {
-  padding-bottom: 5rem;
 }
 
 @media only screen and (max-width: 414px) {
