@@ -36,9 +36,10 @@ describe("Test buildStats", () => {
     const firstPlayer = stats.players[0];
     const eloHistory = firstPlayer.eloHistory;
 
+    // Everyone has a starting ELO
+    // and two games have been played in the test data
     expect(eloHistory.length).toBe(3);
     eloHistory.forEach(elo => expect(typeof elo).toBe('number'));
-
     done();
   });
 });
