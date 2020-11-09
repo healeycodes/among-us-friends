@@ -18,14 +18,11 @@ app.get("/", (request, response) => {
   response.sendFile(__dirname + "/views/index.html");
 });
 
-<<<<<<< HEAD
-=======
 app.get("/player/:player", (request, response) => {
   const { player } = request.params;
   response.sendFile(__dirname + "/views/player.html");
 });
 
->>>>>>> glitch
 app.get("/stats", async (request, response) => {
   const data = await sheetData();
   const stats = buildStats(data);
