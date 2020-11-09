@@ -42,14 +42,6 @@ app.get("/raw-stats", async (request, response) => {
 async function sheetData() {
   return fetch(
     `https://sheets.googleapis.com/v4/spreadsheets/${process.env.SHEETS_ID}/values/C4:O1000?key=${process.env.SHEETS_API_KEY}`
-<<<<<<< HEAD
-  ).then(res => res.json())
-}
-
-function log(request) {
-  const msg = `${(new Date()).toLocaleString()} ${request.headers["x-forwarded-for"]}\n`
-  fs.appendFile(LOG_FILE, msg, function (err) {
-=======
   ).then(res => res.json());
 }
 
@@ -58,7 +50,6 @@ function log(request) {
     request.headers["x-forwarded-for"]
   }\n`;
   fs.appendFile(LOG_FILE, msg, function(err) {
->>>>>>> glitch
     if (err) throw err;
   });
 }
