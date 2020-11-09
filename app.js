@@ -3,7 +3,7 @@ const fetch = require("node-fetch");
 const express = require("express");
 const app = express();
 app.use(express.static("public"));
-const { buildStats, buildPlayer } = require("./stats");
+const { buildStats } = require("./stats");
 
 const LOG_FILE = "log.txt";
 

@@ -17,22 +17,22 @@ describe("Test buildStats", () => {
     expect(stats).toHaveProperty("players");
 
     const firstPlayer = stats.players[0];
-    expect(typeof firstPlayer.crewLoss).toBe("number");
-    expect(typeof firstPlayer.crewWin).toBe("number");
-    expect(typeof firstPlayer.elo).toBe("number");
-    expect(typeof firstPlayer.eloHistory.length).toBe("number");
-    expect(typeof firstPlayer.games.length).toBe("number");
+    expect(firstPlayer.crewLoss).toStrictEqual(0);
+    expect(firstPlayer.crewWin).toStrictEqual(2);
+    expect(firstPlayer.elo).toStrictEqual(1232);
+    expect(typeof firstPlayer.eloHistory.length).toStrictEqual("number");
+    expect(firstPlayer.games.length).toStrictEqual(2);
+    expect(firstPlayer.imposterLoss).toStrictEqual(0);
+    expect(firstPlayer.imposterWin).toStrictEqual(0);
+    expect(firstPlayer.name).toStrictEqual("andy");
 
     const firstGame = firstPlayer.games[0];
-    expect(typeof firstGame.diff).toBe("number");
-    expect(typeof firstGame.crew.length).toBe("number");
-    expect(typeof firstGame.crew[0]).toBe("string");
-    expect(typeof firstGame.imposters.length).toBe("number");
-    expect(typeof firstGame.imposters[0]).toBe("string");
-
-    expect(typeof firstPlayer.imposterLoss).toBe("number");
-    expect(typeof firstPlayer.imposterWin).toBe("number");
-    expect(typeof firstPlayer.name).toBe("string");
+    expect(firstGame.diff).toStrictEqual(16); // Crew ELO diff
+    expect(stats.players[9].games[0].diff).toStrictEqual(-16); // Imposter ELO diff
+    expect(firstGame.crew.length).toStrictEqual(8);
+    expect(firstGame.crew[0]).toStrictEqual("andy");
+    expect(firstGame.imposters.length).toStrictEqual(2);
+    expect(firstGame.imposters[0]).toStrictEqual("gem");
     done();
   });
 
