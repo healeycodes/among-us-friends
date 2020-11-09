@@ -13,9 +13,10 @@ app.get("/", (request, response) => {
 });
 
 // Our datasource is a series of rows
-const sheetData = () => fetch(
-  `https://sheets.googleapis.com/v4/spreadsheets/${process.env.SHEETS_ID}/values/C4:O1000?key=${process.env.SHEETS_API_KEY}`
-).then(res => res.json());
+const sheetData = () =>
+  fetch(
+    `https://sheets.googleapis.com/v4/spreadsheets/${process.env.SHEETS_ID}/values/C4:O1000?key=${process.env.SHEETS_API_KEY}`
+  ).then(res => res.json());
 
 app.get("/stats", async (request, response) => {
   const data = await sheetData();

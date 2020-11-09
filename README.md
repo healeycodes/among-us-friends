@@ -18,7 +18,7 @@ Enter data starting at C4 downwards. The rows should be 13 cells long.
 
 10 player slots (which should be left empty if you have less than 10), 2 slots for the imposters (the names are repeated from the player list), and a final slot for the winner ('crew' or 'imposter').
 
-E.g. 
+E.g.
 
 ```
 "andy" -- player list
