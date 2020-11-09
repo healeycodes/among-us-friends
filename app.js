@@ -1,9 +1,15 @@
+<<<<<<< HEAD
 const fs = require('fs');
+=======
+const fs = require("fs");
+>>>>>>> glitch
 const fetch = require("node-fetch");
 const express = require("express");
 const app = express();
 app.use(express.static("public"));
-const { buildStats } = require("./stats");
+const { buildStats, buildPlayer } = require("./stats");
+
+const LOG_FILE = "log.txt";
 
 const LOG_FILE = "log.txt"
 
@@ -12,6 +18,14 @@ app.get("/", (request, response) => {
   response.sendFile(__dirname + "/views/index.html");
 });
 
+<<<<<<< HEAD
+=======
+app.get("/player/:player", (request, response) => {
+  const { player } = request.params;
+  response.sendFile(__dirname + "/views/player.html");
+});
+
+>>>>>>> glitch
 app.get("/stats", async (request, response) => {
   const data = await sheetData();
   const stats = buildStats(data);
@@ -28,12 +42,23 @@ app.get("/raw-stats", async (request, response) => {
 async function sheetData() {
   return fetch(
     `https://sheets.googleapis.com/v4/spreadsheets/${process.env.SHEETS_ID}/values/C4:O1000?key=${process.env.SHEETS_API_KEY}`
+<<<<<<< HEAD
   ).then(res => res.json())
 }
 
 function log(request) {
   const msg = `${(new Date()).toLocaleString()} ${request.headers["x-forwarded-for"]}\n`
   fs.appendFile(LOG_FILE, msg, function (err) {
+=======
+  ).then(res => res.json());
+}
+
+function log(request) {
+  const msg = `${new Date().toLocaleString()} ${
+    request.headers["x-forwarded-for"]
+  }\n`;
+  fs.appendFile(LOG_FILE, msg, function(err) {
+>>>>>>> glitch
     if (err) throw err;
   });
 }

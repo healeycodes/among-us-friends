@@ -1,5 +1,6 @@
 const statsList = document.getElementById("stats");
 
+<<<<<<< HEAD:public/script.js
 function generatePlayerGraph(player) {
   const ctx = document.getElementById(player.name).getContext("2d");
   const playerGraph = new window.Chart(ctx, {
@@ -29,6 +30,8 @@ function generatePlayerGraph(player) {
   });
 }
 
+=======
+>>>>>>> glitch:public/stats.js
 fetch("/stats")
   .then(response => response.json())
   .then(json => {
@@ -61,7 +64,7 @@ fetch("/stats")
 
       const elo = player.eloHistory.length <= 10 ? "~" : player.elo;
       newListItem.innerHTML = `<div class="player">
-  <h5>${player.name} <small>(<code>${elo}</code>)</small></h5>
+  <h5><a href="/player/${player.name}">${player.name}</a> <small>(<code>${elo}</code>)</small></h5>
   <ul style="list-style-type: none; padding-bottom: 1em;">
     ${crewText}
     ${imposterText}
@@ -72,6 +75,6 @@ fetch("/stats")
 </div>`;
 
       statsList.appendChild(newListItem);
-      generatePlayerGraph(player);
+      window.generatePlayerGraph(player);
     }
   });

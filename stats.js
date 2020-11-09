@@ -44,7 +44,8 @@ function buildStats(data) {
           imposterWin: 0,
           imposterLoss: 0,
           elo: 1200,
-          eloHistory: [1200]
+          eloHistory: [1200],
+          games: []
         };
       })
   );
@@ -66,27 +67,35 @@ function buildStats(data) {
     // Handle crew
     crew.forEach(crewmate => {
       const player = players[crewmate];
+      let diff;
       if (winner === "crew") {
+        diff = eloCalc(player.elo, imposterAvgElo, "a")[0];
         player.crewWin += 1;
-        player.elo += eloCalc(player.elo, imposterAvgElo, "a")[0];
+        player.elo += diff;
       } else {
+        diff = eloCalc(player.elo, imposterAvgElo, "b")[0];
         player.crewLoss += 1;
-        player.elo += eloCalc(player.elo, imposterAvgElo, "b")[0];
+        player.elo += diff;
       }
       player.eloHistory.push(player.elo);
+      player.games.push({ crew: [...crew], imposters, winner, diff });
     });
 
     // Handle imposters
     imposters.forEach(imposter => {
       const player = players[imposter];
+      let diff;
       if (winner === "imposter") {
+        diff = eloCalc(crewAvgElo, player.elo, "b")[1];
         player.imposterWin += 1;
-        player.elo += eloCalc(crewAvgElo, player.elo, "b")[1];
+        player.elo += diff;
       } else {
+        diff = eloCalc(crewAvgElo, player.elo, "a")[1];
         player.imposterLoss += 1;
-        player.elo += eloCalc(crewAvgElo, player.elo, "a")[1];
+        player.elo += diff;
       }
       player.eloHistory.push(player.elo);
+      player.games.push({ crew: [...crew], imposters, winner, diff });
     });
   });
 
