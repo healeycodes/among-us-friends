@@ -1,13 +1,16 @@
-function generatePlayerGraph(player) {
+function generatePlayerGraph(player, sample = 0) {
   const ctx = document.getElementById(player.name).getContext("2d");
+
+  const eloHistory = (sample && sample < player.eloHistory.length) ? player.eloHistory.slice(-sample) : player.eloHistory
+
   const playerGraph = new window.Chart(ctx, {
     type: "line",
     data: {
-      labels: player.eloHistory.map(() => ""), // required
+      labels: eloHistory.map(() => ""), // required
       datasets: [
         {
           label: "ELO",
-          data: player.eloHistory.map(e => e),
+          data: eloHistory.map(e => e),
           fill: false,
           borderColor: "rgb(75, 192, 192)",
           lineTension: 0.1
