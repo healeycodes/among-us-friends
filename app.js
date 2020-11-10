@@ -8,12 +8,13 @@ const { buildStats } = require("./stats");
 const LOG_FILE = "log.txt";
 
 app.get("/", (request, response) => {
-  log(request);
+  log(request, "home");
   response.sendFile(__dirname + "/views/index.html");
 });
 
 app.get("/player/:player", (request, response) => {
   const { player } = request.params;
+  log(request, `player/${player}`);
   response.sendFile(__dirname + "/views/player.html");
 });
 
@@ -36,8 +37,8 @@ async function sheetData() {
   ).then(res => res.json());
 }
 
-function log(request) {
-  const msg = `${new Date().toLocaleString()} ${
+function log(request, notes = "") {
+  const msg = `${new Date().toLocaleString()} - ${notes} - ${
     request.headers["x-forwarded-for"]
   }\n`;
   fs.appendFile(LOG_FILE, msg, function(err) {
