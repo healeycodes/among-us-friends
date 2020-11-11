@@ -43,6 +43,6 @@ fetch("/stats")
 </div>`;
 
       statsList.appendChild(newListItem);
-      window.generatePlayerGraph(player, 25);
+      window.generatePlayerGraph(player, 30);
     }
   });
