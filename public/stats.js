@@ -32,7 +32,9 @@ fetch("/stats")
 
       const elo = player.eloHistory.length <= 10 ? "~" : player.elo;
       newListItem.innerHTML = `<div class="player">
-  <h5><a href="/player/${player.name}">${player.name}</a> <small>(<code>${elo}</code>)</small></h5>
+  <h5><a href="/player/${player.name}">${
+        player.name
+      }</a> <small>(<code>${elo}</code>)</small></h5>
   <ul style="list-style-type: none; padding-bottom: 1em;">
     ${crewText}
     ${imposterText}
@@ -43,6 +45,6 @@ fetch("/stats")
 </div>`;
 
       statsList.appendChild(newListItem);
-      window.generatePlayerGraph(player, 25);
+      window.generatePlayerGraph(player, 30);
     }
   });
