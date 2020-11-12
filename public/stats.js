@@ -7,7 +7,7 @@ fetch("/stats")
     statsList.firstElementChild.remove();
 
     const players = json.players;
-    for (const player of players) {
+    for (const [rank, player] of players.entries()) {
       const newListItem = document.createElement("div");
 
       const crewWin = player.crewWin;
@@ -32,7 +32,9 @@ fetch("/stats")
 
       const elo = player.eloHistory.length <= 10 ? "~" : player.elo;
       newListItem.innerHTML = `<div class="player">
-  <h5><a href="/player/${player.name}">${player.name}</a> <small>(<code>${elo}</code>)</small></h5>
+  <h5><small>#${rank + 1}</small> <a href="/player/${player.name}">${
+        player.name
+      }</a> <small>(<code>${elo}</code>)</small></h5>
   <ul style="list-style-type: none; padding-bottom: 1em;">
     ${crewText}
     ${imposterText}
