@@ -1,12 +1,16 @@
-const { eloCalc, buildStats } = require("./../stats");
+const { EloChange, buildStats } = require("./../stats");
 const mockSheetsData = require("./mock-sheets-data.json");
 
-describe("Test eloCalc", () => {
+describe("Test EloChange", () => {
   test("It should produce sensible calculations", done => {
-    const playerAWins = eloCalc(1200, 1200, "a");
-    const playerBWins = eloCalc(1200, 1200, "b");
-    expect(playerAWins).toStrictEqual([16, -16]);
-    expect(playerBWins).toStrictEqual([-16, 16]);
+    // For new players
+    let eloChange = EloChange(0);
+    expect(eloChange(1200, 1400)[0]).toStrictEqual(30);
+    expect(eloChange(1200, 1400)[1]).toStrictEqual(-9);
+    // For everyone else
+    eloChange = EloChange(31);
+    expect(eloChange(1400, 1200)[0]).toStrictEqual(4);
+    expect(eloChange(1400, 1200)[1]).toStrictEqual(-15);
     done();
   });
 });
@@ -19,7 +23,7 @@ describe("Test buildStats", () => {
     const firstPlayer = stats.players[0];
     expect(firstPlayer.crewLoss).toStrictEqual(0);
     expect(firstPlayer.crewWin).toStrictEqual(2);
-    expect(firstPlayer.elo).toStrictEqual(1232);
+    expect(firstPlayer.elo).toStrictEqual(1240);
     expect(typeof firstPlayer.eloHistory.length).toStrictEqual("number");
     expect(firstPlayer.games.length).toStrictEqual(2);
     expect(firstPlayer.imposterLoss).toStrictEqual(0);
@@ -27,8 +31,8 @@ describe("Test buildStats", () => {
     expect(firstPlayer.name).toStrictEqual("andy");
 
     const firstGame = firstPlayer.games[0];
-    expect(firstGame.diff).toStrictEqual(16); // Crew ELO diff
-    expect(stats.players[9].games[0].diff).toStrictEqual(-16); // Imposter ELO diff
+    expect(firstGame.diff).toStrictEqual(20); // Crew ELO diff
+    expect(stats.players[9].games[0].diff).toStrictEqual(-20); // Imposter ELO diff
     expect(firstGame.crew.length).toStrictEqual(8);
     expect(firstGame.crew[0]).toStrictEqual("andy");
     expect(firstGame.imposters.length).toStrictEqual(2);

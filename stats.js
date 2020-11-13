@@ -1,23 +1,19 @@
-const EloRank = require("elo-rank");
+const EloRating = require("elo-rating");
 
 const PLACEMENT_GAMES = 10;
-const elo = new EloRank();
 
-// Calculate the ELO rating change of two players
-function eloCalc(playerA, playerB, winner) {
-  const expectedScoreA = elo.getExpected(playerA, playerB);
-  const expectedScoreB = elo.getExpected(playerB, playerA);
-  if (winner === "a") {
+function EloChange(games) {
+  // Based on https://ratings.fide.com/calculator_rtd.phtml
+  // K = 40 for a player with less than 30 games
+  // K = 20 afterwards
+  const K = games > 30 ? 20 : 40;
+  // From playerA's perspective, how much can be won or lost
+  return function (playerA, playerB) {
     return [
-      elo.updateRating(expectedScoreA, 1, playerA) - playerA,
-      elo.updateRating(expectedScoreB, 0, playerB) - playerB
+      EloRating.calculate(playerA, playerB, true, K).playerRating - playerA,
+      EloRating.calculate(playerA, playerB, false, K).playerRating - playerA
     ];
-  } else {
-    return [
-      elo.updateRating(expectedScoreA, 0, playerA) - playerA,
-      elo.updateRating(expectedScoreB, 1, playerB) - playerB
-    ];
-  }
+  };
 }
 
 // Given a raw list of matches in the form of a row of:
@@ -67,13 +63,14 @@ function buildStats(data) {
     // Handle crew
     crew.forEach(crewmate => {
       const player = players[crewmate];
+      const eloChange = EloChange(player.eloHistory.length);
       let diff;
       if (winner === "crew") {
-        diff = eloCalc(player.elo, imposterAvgElo, "a")[0];
+        diff = eloChange(player.elo, imposterAvgElo)[0];
         player.crewWin += 1;
         player.elo += diff;
       } else {
-        diff = eloCalc(player.elo, imposterAvgElo, "b")[0];
+        diff = eloChange(player.elo, imposterAvgElo)[1];
         player.crewLoss += 1;
         player.elo += diff;
       }
@@ -84,13 +81,14 @@ function buildStats(data) {
     // Handle imposters
     imposters.forEach(imposter => {
       const player = players[imposter];
+      const eloChange = EloChange(player.eloHistory.length);
       let diff;
       if (winner === "imposter") {
-        diff = eloCalc(crewAvgElo, player.elo, "b")[1];
+        diff = eloChange(player.elo, crewAvgElo)[0];
         player.imposterWin += 1;
         player.elo += diff;
       } else {
-        diff = eloCalc(crewAvgElo, player.elo, "a")[1];
+        diff = eloChange(player.elo, crewAvgElo)[1];
         player.imposterLoss += 1;
         player.elo += diff;
       }
@@ -111,8 +109,8 @@ function buildStats(data) {
   playersSortedByElo = playersSortedByElo
     .filter(p => p.eloHistory.length > PLACEMENT_GAMES)
     .concat(placements);
-  
+
   return { players: playersSortedByElo };
 }
 
-module.exports = { buildStats, eloCalc };
+module.exports = { buildStats, EloChange };

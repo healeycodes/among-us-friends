@@ -11,11 +11,11 @@
     "test": "jest"
   },
   "dependencies": {
+    "elo-rating": "^1.0.1",
     "express": "^4.17.1",
+    "jest": "^26.6.2",
     "node-fetch": "^2.6.1",
-    "elo-rank": "^1.0.4",
-    "supertest": "^6.0.0",
-    "jest": "^26.6.2"
+    "supertest": "^6.0.0"
   },
   "engines": {
     "node": "12.x"
