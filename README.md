@@ -6,6 +6,8 @@
 
 ![Node.js CI](https://github.com/healeycodes/among-us-friends/workflows/Node.js%20CI/badge.svg)
 
+<br>
+
 I use this to track the performance of players in the Among Us games I play with my friends!
 
 There is a provisional ELO system, and graphs powered by Chart.js. The backend is an Node/Express app, tested by Jest.
