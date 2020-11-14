@@ -6,7 +6,7 @@ function generatePlayerGraph(player, sample = 0) {
   const playerGraph = new window.Chart(ctx, {
     type: "line",
     data: {
-      labels: eloHistory.map(() => ""), // required
+      labels: eloHistory.map(() => ""),
       datasets: [
         {
           label: "ELO",
