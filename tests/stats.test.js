@@ -2,7 +2,7 @@ const { EloChange, buildStats } = require("./../stats");
 const mockSheetsData = require("./mock-sheets-data.json");
 
 describe("Test EloChange", () => {
-  test("It should produce sensible calculations", done => {
+  test("It should produce sensible calculations", (done) => {
     // For new players
     let eloChange = EloChange(0);
     expect(eloChange(1200, 1400)[0]).toStrictEqual(30);
@@ -16,7 +16,7 @@ describe("Test EloChange", () => {
 });
 
 describe("Test buildStats", () => {
-  test("It should have the correct properties", done => {
+  test("It should have the correct properties", (done) => {
     const stats = buildStats(mockSheetsData);
     expect(stats).toHaveProperty("players");
 
@@ -40,7 +40,7 @@ describe("Test buildStats", () => {
     done();
   });
 
-  test("It should have sensible eloHistory", done => {
+  test("It should have sensible eloHistory", (done) => {
     const stats = buildStats(mockSheetsData);
     expect(stats).toHaveProperty("players");
 
@@ -50,7 +50,7 @@ describe("Test buildStats", () => {
     // Everyone has a starting ELO
     // and two games have been played in the test data
     expect(eloHistory.length).toBe(3);
-    eloHistory.forEach(elo => expect(typeof elo).toBe("number"));
+    eloHistory.forEach((elo) => expect(typeof elo).toBe("number"));
     done();
   });
 });

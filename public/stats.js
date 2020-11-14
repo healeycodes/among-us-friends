@@ -1,8 +1,8 @@
 const statsList = document.getElementById("stats");
 
 fetch("/stats")
-  .then(response => response.json())
-  .then(json => {
+  .then((response) => response.json())
+  .then((json) => {
     // Remove loading text
     statsList.firstElementChild.remove();
 
