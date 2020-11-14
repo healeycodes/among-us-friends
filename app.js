@@ -34,14 +34,14 @@ app.get("/raw-stats", async (request, response) => {
 async function sheetData() {
   return fetch(
     `https://sheets.googleapis.com/v4/spreadsheets/${process.env.SHEETS_ID}/values/C4:O1000?key=${process.env.SHEETS_API_KEY}`
-  ).then(res => res.json());
+  ).then((res) => res.json());
 }
 
 function log(request, notes = "") {
   const msg = `${new Date().toLocaleString()} - ${notes} - ${
     request.headers["x-forwarded-for"]
   }\n`;
-  fs.appendFile(LOG_FILE, msg, function(err) {
+  fs.appendFile(LOG_FILE, msg, function (err) {
     if (err) throw err;
   });
 }

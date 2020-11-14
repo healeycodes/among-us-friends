@@ -9,10 +9,10 @@ const app = require("../app");
 
 describe("Test the root path", () => {
   fetch.mockReturnValue(Promise.resolve(mockResponse));
-  test("It should response to the GET method", done => {
+  test("It should response to the GET method", (done) => {
     request(app)
       .get("/")
-      .then(response => {
+      .then((response) => {
         expect(response.statusCode).toBe(200);
         done();
       });
@@ -21,10 +21,10 @@ describe("Test the root path", () => {
 
 describe("Test the stats path", () => {
   fetch.mockReturnValue(Promise.resolve(mockResponse));
-  test("It should response to the GET method", done => {
+  test("It should response to the GET method", (done) => {
     request(app)
       .get("/stats")
-      .then(response => {
+      .then((response) => {
         expect(response.type).toEqual("application/json");
         expect(response.body).toHaveProperty("players");
         expect(response.statusCode).toBe(200);
