@@ -1,6 +1,10 @@
-![Node.js CI](https://github.com/healeycodes/among-us-friends/workflows/Node.js%20CI/badge.svg)
-
 # among-us-friends
+
+> My blog post: [Writing Software for an Among Us League](https://healeycodes.com/writing-software-for-an-among-us-league/)
+
+<br>
+
+![Node.js CI](https://github.com/healeycodes/among-us-friends/workflows/Node.js%20CI/badge.svg)
 
 I use this to track the performance of players in the Among Us games I play with my friends!
 
