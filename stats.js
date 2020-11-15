@@ -39,6 +39,8 @@ function buildStats(data) {
           crewLoss: 0,
           imposterWin: 0,
           imposterLoss: 0,
+          crewElo: 1200,
+          imposterElo: 1200,
           elo: 1200,
           eloHistory: [1200],
           games: [],
@@ -55,10 +57,12 @@ function buildStats(data) {
     let winner = game[12]; // 'crew' or 'imposter'
 
     // Players are measured against the average of the other team
-    const avgElo = (list) =>
-      list.reduce((a, b) => a + players[b].elo, 0) / list.length;
-    let crewAvgElo = avgElo([...crew]);
-    let imposterAvgElo = avgElo(imposters);
+
+    const avgElo = (list, role) =>
+    list.reduce((a, b) => a + players[b][role], 0) / list.length;
+
+    let crewAvgElo = avgElo([...crew], 'crewElo');
+    let imposterAvgElo = avgElo(imposters, 'imposterElo');
 
     // Handle crew
     crew.forEach((crewmate) => {
@@ -66,14 +70,15 @@ function buildStats(data) {
       const eloChange = EloChange(player.eloHistory.length);
       let diff;
       if (winner === "crew") {
-        diff = eloChange(player.elo, imposterAvgElo)[0];
+        diff = eloChange(player.crewElo, imposterAvgElo)[0];
         player.crewWin += 1;
-        player.elo += diff;
+        player.crewElo += diff;
       } else {
-        diff = eloChange(player.elo, imposterAvgElo)[1];
+        diff = eloChange(player.crewElo, imposterAvgElo)[1];
         player.crewLoss += 1;
-        player.elo += diff;
+        player.crewElo += diff;
       }
+      player.elo = (player.crewElo + player.imposterElo) / 2
       player.eloHistory.push(player.elo);
       player.games.unshift({ crew: [...crew], imposters, winner, diff });
     });
@@ -84,14 +89,15 @@ function buildStats(data) {
       const eloChange = EloChange(player.eloHistory.length);
       let diff;
       if (winner === "imposter") {
-        diff = eloChange(player.elo, crewAvgElo)[0];
+        diff = eloChange(player.imposterElo, crewAvgElo)[0];
         player.imposterWin += 1;
-        player.elo += diff;
+        player.imposterElo += diff;
       } else {
-        diff = eloChange(player.elo, crewAvgElo)[1];
+        diff = eloChange(player.imposterElo, crewAvgElo)[1];
         player.imposterLoss += 1;
-        player.elo += diff;
+        player.imposterElo += diff;
       }
+      player.elo = (player.crewElo + player.imposterElo) / 2
       player.eloHistory.push(player.elo);
       player.games.unshift({ crew: [...crew], imposters, winner, diff });
     });

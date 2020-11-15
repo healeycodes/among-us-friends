@@ -9,8 +9,11 @@ fetch("/stats")
 
     const URLparts = document.location.href.split("/");
     const name = URLparts.pop() || URLparts.pop(); // handle potential trailing slash
-    const player = json.players.filter((p) => p.name === name)[0];
-    playerTitle.innerHTML += ` - ${name} (<code>${player.elo}</code>)`;
+
+    const player = json.players.filter(p => p.name === name)[0];
+    const elo = player.elo;
+
+    playerTitle.innerHTML += ` - ${name} (<code>${elo}</code>)`;
 
     document.querySelector("canvas").id = name;
     window.generatePlayerGraph(player);
