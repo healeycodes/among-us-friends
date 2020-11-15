@@ -57,12 +57,11 @@ function buildStats(data) {
     let winner = game[12]; // 'crew' or 'imposter'
 
     // Players are measured against the average of the other team
-    const avgCrewElo = list =>
-      list.reduce((a, b) => a + players[b].crewElo, 0) / list.length;
-    const avgImposterElo = list =>
-      list.reduce((a, b) => a + players[b].imposterElo, 0) / list.length;
-    let crewAvgElo = avgCrewElo([...crew]);
-    let imposterAvgElo = avgImposterElo(imposters);
+    const avgElo = (list, role) =>
+    list.reduce((a, b) => a + players[b][role], 0) / list.length;
+
+    let crewAvgElo = avgElo([...crew], 'crewElo');
+    let imposterAvgElo = avgElo(imposters, 'imposterElo');
 
     // Handle crew
     crew.forEach(crewmate => {
