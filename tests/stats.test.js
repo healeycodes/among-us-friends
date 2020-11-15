@@ -23,7 +23,7 @@ describe("Test buildStats", () => {
     const firstPlayer = stats.players[0];
     expect(firstPlayer.crewLoss).toStrictEqual(0);
     expect(firstPlayer.crewWin).toStrictEqual(2);
-    expect(firstPlayer.elo).toStrictEqual(1240);
+    expect(firstPlayer.elo).toStrictEqual(1219);
     expect(typeof firstPlayer.eloHistory.length).toStrictEqual("number");
     expect(firstPlayer.games.length).toStrictEqual(2);
     expect(firstPlayer.imposterLoss).toStrictEqual(0);
@@ -31,8 +31,8 @@ describe("Test buildStats", () => {
     expect(firstPlayer.name).toStrictEqual("andy");
 
     const firstGame = firstPlayer.games[0];
-    expect(firstGame.diff).toStrictEqual(20); // Crew ELO diff
-    expect(stats.players[9].games[0].diff).toStrictEqual(-20); // Imposter ELO diff
+    expect(firstGame.diff).toStrictEqual(18); // Crew ELO diff
+    expect(stats.players[9].games[1].diff).toStrictEqual(-20); // Imposter ELO diff
     expect(firstGame.crew.length).toStrictEqual(8);
     expect(firstGame.crew[0]).toStrictEqual("andy");
     expect(firstGame.imposters.length).toStrictEqual(2);
