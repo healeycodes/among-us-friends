@@ -58,8 +58,8 @@ The data is brought into the application through the Sheets API (v4).
 
 Set two enviromental variables.
 
-- `SHEETS_ID` - the id in the URL bar.
-- `SHEETS_API_KEY` - an API key from Google Console.
+-   `SHEETS_ID` - the id in the URL bar.
+-   `SHEETS_API_KEY` - an API key from Google Console.
 
 `npm i`
 

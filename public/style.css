@@ -37,6 +37,7 @@ canvas {
 
 .player {
   display: inline-block;
+  min-width: 300px;
 }
 
 .player > h5 {
