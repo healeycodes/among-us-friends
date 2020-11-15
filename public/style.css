@@ -1,105 +1,116 @@
 * {
-  box-sizing: border-box;
-  font-family: "Inter", sans-serif;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
 }
 
 body {
-  padding-top: 5rem;
-  margin: 2em 1em;
-  line-height: 1.5em;
+    padding-top: 5rem;
+    margin: 2em 1em;
+    line-height: 1.5em;
 }
 
 main {
-  padding: 3rem 1.5rem;
+    padding: 3rem 1.5rem;
 }
 
 footer {
-  padding-bottom: 5rem;
+    padding-bottom: 5rem;
 }
 
 a {
-  text-decoration: initial;
+    text-decoration: initial;
 }
 
 h1 {
-  font-style: italic;
+    font-style: italic;
 }
 
 code {
-  font-style: normal;
+    font-style: normal;
 }
 
 canvas {
-  position: relative;
-  top: 38px;
-  left: 32px;
+    position: relative;
+    top: 38px;
+    left: 32px;
 }
 
 .player {
-  display: inline-block;
-  min-width: 300px;
+    display: inline-block;
+    min-width: 300px;
 }
 
 .player > h5 {
-  text-align: center;
+    text-align: center;
 }
 
 .player > ul {
-  padding-left: 0;
+    padding-left: 0;
 }
 
 .player-graph {
-  display: inline-block;
+    display: inline-block;
 }
 
 .single-graph {
-  max-width: 500px;
-  height: 200px;
-  margin-bottom: 145px;
+    max-width: 500px;
+    height: 200px;
+    margin-bottom: 145px;
 }
 
 #stats {
-  padding-left: 0;
+    padding-left: 0;
 }
 
 .green {
-  color: green;
+    color: green;
 }
 
 .red {
-  color: red;
+    color: red;
+}
+
+.elo-explainer {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    max-width: 600px;
+}
+
+.elo-explainer > summary {
+    margin-bottom: 10px;
+    outline: none;
 }
 
 @media only screen and (max-width: 414px) {
-  canvas {
-    top: 0;
-    left: 0;
-  }
-  .single-graph {
-    margin-bottom: initial;
-  }
+    canvas {
+        top: 0;
+        left: 0;
+    }
+    .single-graph {
+        margin-bottom: initial;
+    }
 }
 
 .loading:after {
-  display: inline-block;
-  animation: dotty steps(1, end) 1s infinite;
-  content: "";
+    display: inline-block;
+    animation: dotty steps(1, end) 1s infinite;
+    content: "";
 }
 
 @keyframes dotty {
-  0% {
-    content: "";
-  }
-  25% {
-    content: ".";
-  }
-  50% {
-    content: "..";
-  }
-  75% {
-    content: "...";
-  }
-  100% {
-    content: "";
-  }
+    0% {
+        content: "";
+    }
+    25% {
+        content: ".";
+    }
+    50% {
+        content: "..";
+    }
+    75% {
+        content: "...";
+    }
+    100% {
+        content: "";
+    }
 }
