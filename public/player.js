@@ -2,13 +2,14 @@ const playerTitle = document.querySelector("#player-title");
 const playerList = document.querySelector(".player");
 
 fetch("/stats")
-  .then(response => response.json())
-  .then(json => {
+  .then((response) => response.json())
+  .then((json) => {
     // Remove loading text
     document.querySelector(".loading").remove();
 
     const URLparts = document.location.href.split("/");
     const name = URLparts.pop() || URLparts.pop(); // handle potential trailing slash
+
     const player = json.players.filter(p => p.name === name)[0];
     const elo = player.elo;
 
@@ -18,7 +19,7 @@ fetch("/stats")
     window.generatePlayerGraph(player);
 
     const gamesList = document.createElement("div");
-    player.games.forEach(game => {
+    player.games.forEach((game) => {
       const gameElem = document.createElement("p");
       gameElem.classList.add("game-history");
       gameElem.innerHTML = `${

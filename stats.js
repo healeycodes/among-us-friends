@@ -11,7 +11,7 @@ function EloChange(games) {
   return function (playerA, playerB) {
     return [
       EloRating.calculate(playerA, playerB, true, K).playerRating - playerA,
-      EloRating.calculate(playerA, playerB, false, K).playerRating - playerA
+      EloRating.calculate(playerA, playerB, false, K).playerRating - playerA,
     ];
   };
 }
@@ -23,16 +23,16 @@ function EloChange(games) {
 //       'playerA', 'playerB', 'crew'] <-- two imposters, and the winner 'crew' or 'imposter'
 function buildStats(data) {
   // We use this to filter out empty slots in a row (e.g. when there are nine players)
-  const isEmpty = name => name !== "";
+  const isEmpty = (name) => name !== "";
 
   // Create empty players
   let players = {};
   // Search all games for unique players
-  data.values.forEach(game =>
+  data.values.forEach((game) =>
     game
       .slice(0, 12)
       .filter(isEmpty)
-      .forEach(player => {
+      .forEach((player) => {
         players[player] = {
           name: player,
           crewWin: 0,
@@ -43,13 +43,13 @@ function buildStats(data) {
           imposterElo: 1200,
           elo: 1200,
           eloHistory: [1200],
-          games: []
+          games: [],
         };
       })
   );
 
   // Handle each game
-  data.values.forEach(game => {
+  data.values.forEach((game) => {
     let crew = new Set(game.slice(0, 10).filter(isEmpty)); // nine or ten player names
     let imposters = game.slice(10, 12); // two player names
     crew.delete(imposters[0]);
@@ -57,6 +57,7 @@ function buildStats(data) {
     let winner = game[12]; // 'crew' or 'imposter'
 
     // Players are measured against the average of the other team
+
     const avgElo = (list, role) =>
     list.reduce((a, b) => a + players[b][role], 0) / list.length;
 
@@ -64,7 +65,7 @@ function buildStats(data) {
     let imposterAvgElo = avgElo(imposters, 'imposterElo');
 
     // Handle crew
-    crew.forEach(crewmate => {
+    crew.forEach((crewmate) => {
       const player = players[crewmate];
       const eloChange = EloChange(player.eloHistory.length);
       let diff;
@@ -83,7 +84,7 @@ function buildStats(data) {
     });
 
     // Handle imposters
-    imposters.forEach(imposter => {
+    imposters.forEach((imposter) => {
       const player = players[imposter];
       const eloChange = EloChange(player.eloHistory.length);
       let diff;
@@ -109,10 +110,10 @@ function buildStats(data) {
 
   // Segment those in their placements, move to end of the list
   let placements = playersSortedByElo.filter(
-    p => p.eloHistory.length <= PLACEMENT_GAMES
+    (p) => p.eloHistory.length <= PLACEMENT_GAMES
   );
   playersSortedByElo = playersSortedByElo
-    .filter(p => p.eloHistory.length > PLACEMENT_GAMES)
+    .filter((p) => p.eloHistory.length > PLACEMENT_GAMES)
     .concat(placements);
 
   return { players: playersSortedByElo };
