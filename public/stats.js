@@ -30,11 +30,13 @@ fetch("/stats")
           ? `<li>👹&nbsp;&nbsp;win ${imposterWin}, loss ${imposterLoss}, win rate of ${imposterWinRate}%</li>`
           : "";
 
-      const elo = player.eloHistory.length <= 10 ? "~" : player.elo;
+      const elo = player.elo.history.length <= 10 ? "~" : player.elo.current;
+      const crewElo = player.crewElo.current;
+      const imposterElo = player.imposterElo.current;
       newListItem.innerHTML = `<div class="player">
   <h5><small>#${rank + 1}</small> <a href="/player/${player.name}">${
         player.name
-      }</a> <small>(<code>${elo}</code>)</small></h5>
+      }</a> <small>(<code>${elo}</code>) / (<code>${crewElo}</code>) / (<code>${imposterElo}</code>)</small></h5>
   <ul style="list-style-type: none; padding-bottom: 1em;">
     ${crewText}
     ${imposterText}

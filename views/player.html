@@ -37,6 +37,16 @@
       <div class="single-graph">
         <canvas></canvas>
       </div>
+      <div class="line-switches">
+        <label class="switch">
+          <input id="crew-switch" type="checkbox" onClick="toggleLine()">
+          <span class="slider round">Crew Elo</span>
+        </label>
+        <label class="switch">
+          <input id="imposter-switch" type="checkbox" onClick="toggleLine()">
+          <span class="slider round">Imposter Elo</span>
+        </label>
+      </div>
       <section class="player"></section>
     </main>
 

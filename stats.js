@@ -39,10 +39,18 @@ function buildStats(data) {
           crewLoss: 0,
           imposterWin: 0,
           imposterLoss: 0,
-          crewElo: 1200,
-          imposterElo: 1200,
-          elo: 1200,
-          eloHistory: [1200],
+          crewElo: {
+            current: 1200,
+            history: [1200]
+          },
+          imposterElo: {
+            current: 1200,
+            history: [1200]
+          },
+          elo: {
+            current: 1200,
+            history: [1200]
+          },
           games: [],
         };
       })
@@ -59,7 +67,7 @@ function buildStats(data) {
     // Players are measured against the average of the other team
 
     const avgElo = (list, role) =>
-    list.reduce((a, b) => a + players[b][role], 0) / list.length;
+    list.reduce((a, b) => a + players[b][role].current, 0) / list.length;
 
     let crewAvgElo = avgElo([...crew], 'crewElo');
     let imposterAvgElo = avgElo(imposters, 'imposterElo');
@@ -67,53 +75,57 @@ function buildStats(data) {
     // Handle crew
     crew.forEach((crewmate) => {
       const player = players[crewmate];
-      const eloChange = EloChange(player.eloHistory.length);
+      const eloChange = EloChange(player.elo.history.length);
       let diff;
       if (winner === "crew") {
-        diff = eloChange(player.crewElo, imposterAvgElo)[0];
+        diff = eloChange(player.crewElo.current, imposterAvgElo)[0];
         player.crewWin += 1;
-        player.crewElo += diff;
+        player.crewElo.current += diff;
       } else {
-        diff = eloChange(player.crewElo, imposterAvgElo)[1];
+        diff = eloChange(player.crewElo.current, imposterAvgElo)[1];
         player.crewLoss += 1;
-        player.crewElo += diff;
+        player.crewElo.current += diff;
       }
-      player.elo = (player.crewElo + player.imposterElo) / 2
-      player.eloHistory.push(player.elo);
+      player.elo.current = (player.crewElo.current + player.imposterElo.current) / 2
+      player.elo.history.push(player.elo.current);
+      player.crewElo.history.push(player.crewElo.current);
+      player.imposterElo.history.push(player.imposterElo.current);
       player.games.unshift({ crew: [...crew], imposters, winner, diff });
     });
 
     // Handle imposters
     imposters.forEach((imposter) => {
       const player = players[imposter];
-      const eloChange = EloChange(player.eloHistory.length);
+      const eloChange = EloChange(player.elo.history.length);
       let diff;
       if (winner === "imposter") {
-        diff = eloChange(player.imposterElo, crewAvgElo)[0];
+        diff = eloChange(player.imposterElo.current, crewAvgElo)[0];
         player.imposterWin += 1;
-        player.imposterElo += diff;
+        player.imposterElo.current += diff;
       } else {
-        diff = eloChange(player.imposterElo, crewAvgElo)[1];
+        diff = eloChange(player.imposterElo.current, crewAvgElo)[1];
         player.imposterLoss += 1;
-        player.imposterElo += diff;
+        player.imposterElo.current += diff;
       }
-      player.elo = (player.crewElo + player.imposterElo) / 2
-      player.eloHistory.push(player.elo);
+      player.elo.current = (player.crewElo.current + player.imposterElo.current) / 2
+      player.elo.history.push(player.elo.current);
+      player.crewElo.history.push(player.crewElo.current);
+      player.imposterElo.history.push(player.imposterElo.current);
       player.games.unshift({ crew: [...crew], imposters, winner, diff });
     });
   });
 
   // Sort best to worst
   let playersSortedByElo = Object.values(players).sort((a, b) => {
-    return b.elo - a.elo;
+    return b.elo.current - a.elo.current;
   });
 
   // Segment those in their placements, move to end of the list
   let placements = playersSortedByElo.filter(
-    (p) => p.eloHistory.length <= PLACEMENT_GAMES
+    (p) => p.elo.history.length <= PLACEMENT_GAMES
   );
   playersSortedByElo = playersSortedByElo
-    .filter((p) => p.eloHistory.length > PLACEMENT_GAMES)
+    .filter((p) => p.elo.history.length > PLACEMENT_GAMES)
     .concat(placements);
 
   return { players: playersSortedByElo };
