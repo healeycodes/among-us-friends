@@ -1,3 +1,4 @@
+const { hidePlayers } = require("./config.json")
 const EloRating = require("elo-rating")
 
 const PLACEMENT_GAMES = 10
@@ -118,7 +119,12 @@ function buildStats(data) {
         .filter(p => p.eloHistory.length > PLACEMENT_GAMES)
         .concat(placements)
 
-    return { players: playersSortedByElo }
+    // Hide players who have requested to not be ranked
+    let displayPlayers = playersSortedByElo.filter(
+        p => hidePlayers.includes(p.name) === false
+    )
+
+    return { players: displayPlayers }
 }
 
 module.exports = { buildStats, EloChange }
