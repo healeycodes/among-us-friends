@@ -1,25 +1,32 @@
-const fs = require("fs")
 const fetch = require("node-fetch")
 const express = require("express")
 const app = express()
 app.use(express.static("public"))
 const { buildStats } = require("./stats")
-
-const LOG_FILE = "log.txt"
+const { hidePlayers, seasonFiles } = require("./config.json")
+const seasons = seasonFiles.map(file => require(`./public/seasons/${file}`))
 
 app.get("/", (request, response) => {
-    log(request, "home")
     response.sendFile(__dirname + "/views/index.html")
 })
 
 app.get("/player/:player", (request, response) => {
     const { player } = request.params
-    log(request, `player/${player}`)
     response.sendFile(__dirname + "/views/player.html")
 })
 
-app.get("/stats", async (request, response) => {
-    const data = await sheetData()
+app.get("/hide-players", (request, response) => {
+    response.json(hidePlayers)
+})
+
+app.get("/stats/:season", async (request, response) => {
+    const season = request.params.season
+    let data
+    if (season === "current") {
+        data = await sheetData()
+    } else {
+        data = seasons[parseInt(season)]
+    }
     const stats = buildStats(data)
     response.json(stats)
 })
@@ -35,15 +42,6 @@ async function sheetData() {
     return fetch(
         `https://sheets.googleapis.com/v4/spreadsheets/${process.env.SHEETS_ID}/values/C4:O1000?key=${process.env.SHEETS_API_KEY}`
     ).then(res => res.json())
-}
-
-function log(request, notes = "") {
-    const msg = `${new Date().toLocaleString()} - ${notes} - ${
-        request.headers["x-forwarded-for"]
-    }\n`
-    fs.appendFile(LOG_FILE, msg, function (err) {
-        if (err) throw err
-    })
 }
 
 module.exports = app

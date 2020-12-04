@@ -81,6 +81,10 @@ canvas {
     outline: none;
 }
 
+#season-select {
+    margin-bottom: 50px;
+}
+
 @media only screen and (max-width: 414px) {
     canvas {
         top: 0;
