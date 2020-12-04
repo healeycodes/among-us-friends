@@ -7,7 +7,7 @@ function getStats(select) {
         season = "current"
     }
 
-    // Add loading indicator or clear the board if we're changing season
+    // Add loading indicator
     document.querySelector(".loading-indicator").innerHTML =
         '<em class="loading">loading</em>'
 
