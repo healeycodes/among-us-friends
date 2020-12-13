@@ -89,7 +89,7 @@ function buildStats(data) {
                 season.mapData[map].crewLoss++
             }
         }
-        if (winner === "crew") {
+        if (winner === "imposter") {
             season.duos[getImposterDuoTeamName(game)].win++
         } else {
             season.duos[getImposterDuoTeamName(game)].loss++
