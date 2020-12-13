@@ -5,6 +5,24 @@ function load(json) {
     document.querySelector(".loading-indicator").innerHTML = ""
     document.querySelectorAll(".player-row").forEach(elem => elem.remove())
 
+    const seasonStats = document.querySelector("#season-stats")
+    seasonStats.innerHTML = `There have been ${json.season.totalGames} games played.`
+    Object.keys(json.season.mapData).forEach(map => {
+        const crewWin = json.season.mapData[map].crewWin
+        const crewLoss = json.season.mapData[map].crewLoss
+        const percent = parseFloat(
+            (crewWin / (crewWin + crewLoss)) * 100
+        ).toFixed(2)
+        seasonStats.innerHTML += `<br/>Crew win ${percent}% of the time on ${getMap(
+            map
+        )}.`
+    })
+    if (json.deadlyDuos.length > 0) {
+        seasonStats.innerHTML += `<br/>The deadliest imposter ${
+            json.deadlyDuos.length > 1 ? "duos are" : "duo is"
+        } ${json.deadlyDuos.join(", ")}.`
+    }
+
     const players = json.players
     for (const [rank, player] of players.entries()) {
         const newListItem = document.createElement("div")

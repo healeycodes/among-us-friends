@@ -1,13 +1,6 @@
 const playerElo = document.querySelector("#player-elo")
 const playerList = document.querySelector(".player")
 
-const maps = {
-    skeld: "🏟️ The Skeld",
-    polus: "🌋 Polus",
-    mira: "🛰️ Mira HQ",
-    airship: "✈️ The Airship",
-}
-
 function load(json) {
     // Remove loading text and any old data
     document.querySelector(".loading-indicator").innerHTML = ""
@@ -18,6 +11,7 @@ function load(json) {
 
     const player = json.players.filter(p => p.name === name)[0]
     const elo = player.elo
+    let imposterGames = 0
 
     playerElo.innerHTML = ` - ${name} (<code>${elo}</code>)`
 
@@ -27,7 +21,7 @@ function load(json) {
     const gamesList = document.createElement("div")
     gamesList.classList.add("games-list")
     player.games.forEach(game => {
-        let map = maps[game.map]
+        let map = getMap(game.map)
 
         const gameElem = document.createElement("p")
         gameElem.classList.add("game-history")
@@ -39,8 +33,16 @@ function load(json) {
             map ? `<br/>${map}` : ""
         }<br/>👹 ${game.imposters.join(" ")}<br/>😇 ${game.crew.join(" ")}`
         gamesList.appendChild(gameElem)
+        if (game.imposters.includes(name)) {
+            imposterGames++
+        }
     })
     playerList.appendChild(gamesList)
+
+    const seasonStats = document.querySelector("#season-stats")
+    seasonStats.innerHTML = `${name} gets imposter ${parseFloat(
+        (imposterGames / player.games.length) * 100
+    ).toFixed(2)}% of the time this season.`
 }
 
 getStats().then(json => load(json))

@@ -19,6 +19,10 @@ function EloChange(games) {
     }
 }
 
+function getImposterDuoTeamName(game) {
+    return game.slice(10, 12).sort().join(" ✕ ")
+}
+
 // Given a raw list of matches in the form of a row of:
 // ten slots for players, two slots for imposters, one slot for winner
 // e.g. ['playerA', 'playerB', 'playerC', 'playerD', 'playerE',
@@ -51,6 +55,23 @@ function buildStats(data) {
             })
     )
 
+    // Overall season stats
+    let season = {
+        totalGames: data.values.length,
+        mapData: {},
+        duos: {},
+    }
+    data.values.forEach(game => {
+        const map = game[13]
+        if (map !== undefined) {
+            season.mapData[map] = { crewWin: 0, crewLoss: 0 }
+        }
+        season.duos[getImposterDuoTeamName(game)] = {
+            win: 0,
+            loss: 0,
+        }
+    })
+
     // Handle each game
     data.values.forEach(game => {
         let crew = new Set(game.slice(0, 10).filter(isEmpty)) // nine or ten player names
@@ -59,6 +80,20 @@ function buildStats(data) {
         crew.delete(imposters[1])
         let winner = game[12] // 'crew' or 'imposter'
         const map = game[13] // map short name
+
+        // Handle overall season stats
+        if (map) {
+            if (winner === "crew") {
+                season.mapData[map].crewWin++
+            } else {
+                season.mapData[map].crewLoss++
+            }
+        }
+        if (winner === "crew") {
+            season.duos[getImposterDuoTeamName(game)].win++
+        } else {
+            season.duos[getImposterDuoTeamName(game)].loss++
+        }
 
         // Players are measured against the average of the other team
         const avgElo = (list, role) =>
@@ -136,7 +171,27 @@ function buildStats(data) {
         p => hidePlayers.includes(p.name) === false
     )
 
-    return { players: displayPlayers }
+    // Find out the highest number of duo wins
+    // Get all the duos with this number of wins
+    let deadlyDuos = []
+    let qualifyingWins = 0
+    Object.keys(season.duos).forEach(name => {
+        duo = season.duos[name]
+        qualifyingWins = Math.max(duo.win, qualifyingWins)
+    })
+    Object.keys(season.duos).forEach(name => {
+        duo = season.duos[name]
+        if (qualifyingWins !== 0 && duo.win === qualifyingWins) {
+            deadlyDuos.push(name)
+        }
+    })
+
+    return {
+        players: displayPlayers,
+        season,
+        deadlyDuos,
+        deadlyDuosRaw: season.duos,
+    }
 }
 
 module.exports = { buildStats, EloChange }

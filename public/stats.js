@@ -13,3 +13,18 @@ function getStats(select) {
 
     return fetch(`/stats/${season}`).then(response => response.json())
 }
+
+function getMap(map) {
+    const maps = {
+        skeld: "🏟️ The Skeld",
+        polus: "🌋 Polus",
+        mira: "🛰️ Mira HQ",
+        airship: "✈️ The Airship",
+    }
+
+    if (map in maps) {
+        return maps[map]
+    }
+
+    return "❓ Unknown map"
+}
