@@ -40,7 +40,7 @@ app.get("/raw-stats", async (request, response) => {
 // Our datasource is a series of rows
 async function sheetData() {
     return fetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${process.env.SHEETS_ID}/values/C4:O1000?key=${process.env.SHEETS_API_KEY}`
+        `https://sheets.googleapis.com/v4/spreadsheets/${process.env.SHEETS_ID}/values/C4:Q1000?key=${process.env.SHEETS_API_KEY}`
     ).then(res => res.json())
 }
 

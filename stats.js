@@ -58,9 +58,9 @@ function buildStats(data) {
         crew.delete(imposters[0])
         crew.delete(imposters[1])
         let winner = game[12] // 'crew' or 'imposter'
+        const map = game[13] // map short name
 
         // Players are measured against the average of the other team
-
         const avgElo = (list, role) =>
             list.reduce((a, b) => a + players[b][role], 0) / list.length
 
@@ -83,7 +83,13 @@ function buildStats(data) {
             }
             player.elo = (player.crewElo + player.imposterElo) / 2
             player.eloHistory.push(player.elo)
-            player.games.unshift({ crew: [...crew], imposters, winner, diff })
+            player.games.unshift({
+                crew: [...crew],
+                imposters,
+                winner,
+                diff,
+                map,
+            })
         })
 
         // Handle imposters
@@ -102,7 +108,13 @@ function buildStats(data) {
             }
             player.elo = (player.crewElo + player.imposterElo) / 2
             player.eloHistory.push(player.elo)
-            player.games.unshift({ crew: [...crew], imposters, winner, diff })
+            player.games.unshift({
+                crew: [...crew],
+                imposters,
+                winner,
+                diff,
+                map,
+            })
         })
     })
 
