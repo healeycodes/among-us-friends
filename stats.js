@@ -176,11 +176,11 @@ function buildStats(data) {
     let deadlyDuos = []
     let qualifyingWins = 0
     Object.keys(season.duos).forEach(name => {
-        duo = season.duos[name]
+        const duo = season.duos[name]
         qualifyingWins = Math.max(duo.win, qualifyingWins)
     })
     Object.keys(season.duos).forEach(name => {
-        duo = season.duos[name]
+        const duo = season.duos[name]
         if (qualifyingWins !== 0 && duo.win === qualifyingWins) {
             deadlyDuos.push(name)
         }
@@ -190,7 +190,6 @@ function buildStats(data) {
         players: displayPlayers,
         season,
         deadlyDuos,
-        deadlyDuosRaw: season.duos,
     }
 }
 

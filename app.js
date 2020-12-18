@@ -3,7 +3,7 @@ const express = require("express")
 const app = express()
 app.use(express.static("public"))
 const { buildStats } = require("./stats")
-const { hidePlayers, seasonFiles } = require("./config.json")
+const { seasonFiles } = require("./config.json")
 const seasons = seasonFiles.map(file => require(`./public/seasons/${file}`))
 
 app.get("/", (request, response) => {
@@ -11,12 +11,7 @@ app.get("/", (request, response) => {
 })
 
 app.get("/player/:player", (request, response) => {
-    const { player } = request.params
     response.sendFile(__dirname + "/views/player.html")
-})
-
-app.get("/hide-players", (request, response) => {
-    response.json(hidePlayers)
 })
 
 app.get("/stats/:season", async (request, response) => {

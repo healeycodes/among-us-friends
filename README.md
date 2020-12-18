@@ -22,14 +22,14 @@ The data source is a Google Sheets file where I store the crew names, imposter n
 
 ![A Google Sheets file](https://github.com/healeycodes/among-us-friends/blob/main/public/sheets.png)
 
-Enter data starting at C4 downwards. The rows should be 13 cells long.
+Enter data starting at C4 downwards. The rows should be 14 cells long.
 
-10 player slots (which should be left empty if you have less than 10), 2 slots for the imposters (the names are repeated from the player list), and a final slot for the winner ('crew' or 'imposter').
+10 player slots (which should be left empty if you have less than 10), 2 slots for the imposters (the names are repeated from the player list), 1 slot for the winner ('crew' or 'imposter'), and 1 slot for the map short name.
 
 E.g.
 
 ```
-"andy" -- player list
+"andy" <-- player list
 "ally"
 "bayf"
 "beans"
@@ -44,6 +44,8 @@ E.g.
 "spon"
 
 "crew" <-- game winner
+
+"skeld" <-- map shortname
 ```
 
 See the above image for clarification.

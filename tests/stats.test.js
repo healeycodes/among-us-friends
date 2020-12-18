@@ -22,16 +22,16 @@ describe("Test buildStats", () => {
 
         const firstPlayer = stats.players[0]
         expect(firstPlayer.crewLoss).toStrictEqual(0)
-        expect(firstPlayer.crewWin).toStrictEqual(2)
-        expect(firstPlayer.elo).toStrictEqual(1219)
+        expect(firstPlayer.crewWin).toStrictEqual(1)
+        expect(firstPlayer.elo).toStrictEqual(1220)
         expect(typeof firstPlayer.eloHistory.length).toStrictEqual("number")
         expect(firstPlayer.games.length).toStrictEqual(2)
         expect(firstPlayer.imposterLoss).toStrictEqual(0)
-        expect(firstPlayer.imposterWin).toStrictEqual(0)
-        expect(firstPlayer.name).toStrictEqual("andy")
+        expect(firstPlayer.imposterWin).toStrictEqual(1)
+        expect(firstPlayer.name).toStrictEqual("nads")
 
         const firstGame = firstPlayer.games[0]
-        expect(firstGame.diff).toStrictEqual(18) // Crew ELO diff
+        expect(firstGame.diff).toStrictEqual(20) // Crew ELO diff
         expect(stats.players[9].games[1].diff).toStrictEqual(-20) // Imposter ELO diff
         expect(firstGame.crew.length).toStrictEqual(8)
         expect(firstGame.crew[0]).toStrictEqual("andy")
@@ -51,6 +51,16 @@ describe("Test buildStats", () => {
         // and two games have been played in the test data
         expect(eloHistory.length).toBe(3)
         eloHistory.forEach(elo => expect(typeof elo).toBe("number"))
+        done()
+    })
+
+    test("It should have sensible deadlyDuos", done => {
+        const stats = buildStats(mockSheetsData)
+        expect(stats).toHaveProperty("deadlyDuos")
+
+        const deadlyDuos = stats.deadlyDuos
+        expect(deadlyDuos.length).toBe(1)
+        expect(deadlyDuos[0]).toBe("gem ✕ nads")
         done()
     })
 })
