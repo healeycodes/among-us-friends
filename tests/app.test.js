@@ -5,7 +5,7 @@ const mockSheetsData = require("./mock-sheets-data.json")
 const mockResponse = new Response(JSON.stringify(mockSheetsData))
 
 const request = require("supertest")
-const app = require("../functions/app")
+const app = require("../src/app")
 
 describe("Test the root path", () => {
     fetch.mockReturnValue(Promise.resolve(mockResponse))
