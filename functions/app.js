@@ -4,7 +4,7 @@ const app = express()
 app.use(express.static("public"))
 const { buildStats } = require("../stats")
 const { seasonFiles } = require("../config.json")
-const seasons = seasonFiles.map(file => require(`./public/seasons/${file}`))
+const seasons = seasonFiles.map(file => require(`../public/seasons/${file}`))
 
 app.get("/player/:player", (request, response) => {
     response.sendFile(__dirname + "/views/player.html")

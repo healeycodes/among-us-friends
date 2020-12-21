@@ -8,12 +8,14 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "jest"
+    "test": "jest",
+    "build": "netlify-lambda build functions"
   },
   "dependencies": {
     "elo-rating": "^1.0.1",
     "express": "^4.17.1",
     "jest": "^26.6.2",
+    "netlify-lambda": "^2.0.2",
     "node-fetch": "^2.6.1",
     "serverless-http": "^2.6.0",
     "supertest": "^6.0.0"
