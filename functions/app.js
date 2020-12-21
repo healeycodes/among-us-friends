@@ -2,13 +2,9 @@ const fetch = require("node-fetch")
 const express = require("express")
 const app = express()
 app.use(express.static("public"))
-const { buildStats } = require("./stats")
-const { seasonFiles } = require("./config.json")
+const { buildStats } = require("../stats")
+const { seasonFiles } = require("../config.json")
 const seasons = seasonFiles.map(file => require(`./public/seasons/${file}`))
-
-app.get("/", (request, response) => {
-    response.sendFile(__dirname + "/views/index.html")
-})
 
 app.get("/player/:player", (request, response) => {
     response.sendFile(__dirname + "/views/player.html")
@@ -39,4 +35,6 @@ async function sheetData() {
     ).then(res => res.json())
 }
 
+const serverless = require("serverless-http")
 module.exports = app
+module.exports.handler = serverless(app)

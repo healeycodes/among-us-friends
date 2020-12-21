@@ -15,6 +15,7 @@
     "express": "^4.17.1",
     "jest": "^26.6.2",
     "node-fetch": "^2.6.1",
+    "serverless-http": "^2.6.0",
     "supertest": "^6.0.0"
   },
   "engines": {

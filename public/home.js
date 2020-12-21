@@ -50,9 +50,9 @@ function load(json) {
 
         const elo = player.eloHistory.length <= 10 ? "~" : player.elo
         newListItem.innerHTML = `<div class="player">
-<h5><small>#${rank + 1}</small> <a href="/player/${player.name}">${
+<h5><small>#${rank + 1}</small> <a href=".netlify/functions/server/player/${
             player.name
-        }</a> <small>(<code>${elo}</code>)</small></h5>
+        }">${player.name}</a> <small>(<code>${elo}</code>)</small></h5>
 <ul style="list-style-type: none; padding-bottom: 1em;">
 ${crewText}
 ${imposterText}

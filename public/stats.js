@@ -11,7 +11,9 @@ function getStats(select) {
     document.querySelector(".loading-indicator").innerHTML =
         '<em class="loading">loading</em>'
 
-    return fetch(`/stats/${season}`).then(response => response.json())
+    return fetch(`.netlify/functions/server/stats/${season}`).then(response =>
+        response.json()
+    )
 }
 
 function getMap(map) {
