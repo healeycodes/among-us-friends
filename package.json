@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "elo-rating": "^1.0.1",
+    "encoding": "^0.1.13",
     "express": "^4.17.1",
     "jest": "^26.6.2",
     "netlify-lambda": "^2.0.2",
