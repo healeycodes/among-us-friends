@@ -4,7 +4,8 @@ const express = require("express")
 const app = express()
 const router = express.Router()
 
-const seasons = require(`../public/seasons.json`)
+const snapshot = require("../public/dev-snapshot.json")
+const seasons = require("../public/seasons.json")
 const { buildStats } = require("./stats")
 
 router.get("/ping", (_, response) => {
@@ -37,13 +38,18 @@ router.get("/raw-stats", async (request, response) => {
     }
 })
 
-// Our data-source is a series of rows
 async function sheetData() {
-    return fetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${process.env.SHEETS_ID}/values/C4:Q1000?key=${process.env.SHEETS_API_KEY}`
-    )
-        .then(res => res.json())
-        .catch(err => err)
+    // For when we're live and kickin' in production
+    if (process.env.NETLIFY === "true") {
+        return fetch(
+            `https://sheets.googleapis.com/v4/spreadsheets/${process.env.SHEETS_ID}/values/C4:Q1000?key=${process.env.SHEETS_API_KEY}`
+        )
+            .then(res => res.json())
+            .catch(err => err)
+    }
+
+    // For local development
+    return new Promise(resolve => resolve(snapshot))
 }
 
 app.use("/.netlify/functions/app", router)
