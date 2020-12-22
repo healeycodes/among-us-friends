@@ -75,7 +75,7 @@ Set two environmental variables via the Netlify UI.
 
 Set the same environment values as you would to deploy the application (see above).
 
-`node src/server-local.js`
+`node server-local.js`
 
 <br>
 

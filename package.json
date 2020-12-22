@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "jest",
-    "build": "netlify-lambda build src --config ./src/webpack.functions.js"
+    "build": "netlify-lambda build src --config ./webpack.functions.js"
   },
   "dependencies": {
     "elo-rating": "^1.0.1",
