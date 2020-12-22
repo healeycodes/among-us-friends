@@ -11,7 +11,7 @@ function getStats(select) {
     document.querySelector(".loading-indicator").innerHTML =
         '<em class="loading">loading</em>'
 
-    return fetch(`.netlify/functions/server/stats/${season}`).then(response =>
+    return fetch(`.netlify/functions/app/stats/${season}`).then(response =>
         response.json()
     )
 }
