@@ -20,3 +20,15 @@ describe("Test the stats path", () => {
             })
     })
 })
+
+describe("Test the player path", () => {
+    fetch.mockReturnValue(Promise.resolve(mockResponse))
+    test("It should response to the GET method", done => {
+        request(app)
+            .get("/.netlify/functions/app/player/alice")
+            .then(response => {
+                expect(response.statusCode).toBe(200)
+                done()
+            })
+    })
+})

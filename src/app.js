@@ -1,3 +1,4 @@
+const path = require("path")
 const fetch = require("node-fetch").default
 const express = require("express")
 const app = express()
@@ -11,7 +12,8 @@ router.get("/ping", (_, response) => {
 })
 
 router.get("/player/:player", (_, response) => {
-    response.sendFile(__dirname + "../public/player.html")
+    const playerHTML = path.join(__dirname, "../public/player.html")
+    response.sendFile(playerHTML)
 })
 
 router.get("/stats/:season", async (request, response) => {
