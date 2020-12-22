@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "jest",
-    "build": "netlify-lambda build src"
+    "build": "node scripts/apiKeys.js && netlify-lambda build src"
   },
   "dependencies": {
     "elo-rating": "^1.0.1",

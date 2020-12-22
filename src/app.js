@@ -5,6 +5,7 @@ const router = express.Router()
 
 const seasons = require(`../public/seasons.json`)
 const { buildStats } = require("../stats")
+const { SHEETS_API_KEY, SHEETS_ID } = require("../env.json")
 
 router.get("/ping", (_, response) => {
     response.send("OK")
@@ -35,7 +36,7 @@ router.get("/raw-stats", async (request, response) => {
 // Our data-source is a series of rows
 async function sheetData() {
     return fetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${process.env.SHEETS_ID}/values/C4:Q1000?key=${process.env.SHEETS_API_KEY}`
+        `https://sheets.googleapis.com/v4/spreadsheets/${SHEETS_ID}/values/C4:Q1000?key=${SHEETS_API_KEY}`
     )
         .then(res => res.json())
         .catch(err => err)
