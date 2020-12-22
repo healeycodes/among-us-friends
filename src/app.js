@@ -1,4 +1,4 @@
-const fetch = require("node-fetch")
+const fetch = require("node-fetch").default
 const express = require("express")
 const app = express()
 const router = express.Router()
