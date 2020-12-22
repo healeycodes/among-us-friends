@@ -58,7 +58,7 @@ The data is brought into the application through the Sheets API (v4).
 
 <br>
 
-## Deployment
+## Deploy
 
 This application is deployed by Netlify.
 
@@ -69,11 +69,13 @@ Set two environmental variables via the Netlify UI.
 
 <br>
 
-## Local
+## Local Development
 
 `npm i`
 
-`node server-local.js`
+Set the same environment values as you would to deploy the application (see above).
+
+`node src/server-local.js`
 
 <br>
 

@@ -6,8 +6,8 @@ function load(json) {
     document.querySelector(".loading-indicator").innerHTML = ""
     document.querySelectorAll(".games-list").forEach(elem => elem.remove())
 
-    const URLparts = document.location.href.split("/")
-    const name = URLparts.pop() || URLparts.pop() // handle potential trailing slash
+    const urlParams = new URLSearchParams(window.location.search)
+    const name = urlParams.get("name")
 
     const player = json.players.filter(p => p.name === name)[0]
     const elo = player.elo

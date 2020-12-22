@@ -1,4 +1,4 @@
-const { hidePlayers } = require("../config.json")
+const { hidePlayers } = require("./config.json")
 const EloRating = require("elo-rating")
 
 const PLACEMENT_GAMES = 10

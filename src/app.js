@@ -11,11 +11,6 @@ router.get("/ping", (_, response) => {
     response.send("OK")
 })
 
-router.get("/player/:player", (_, response) => {
-    const playerHTML = path.join(__dirname, "../public/player.html")
-    response.sendFile(playerHTML)
-})
-
 router.get("/stats/:season", async (request, response) => {
     const season = request.params.season
     let data
