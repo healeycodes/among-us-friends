@@ -73,9 +73,15 @@ Set two environmental variables via the Netlify UI.
 
 `npm i`
 
-Set the same environment values as you would to deploy the application (see above).
-
 `node server-local.js`
+
+<br>
+
+To use live production data instead of the snapshot, set:
+
+-   `SHEETS_ID` - the id in the URL bar.
+-   `SHEETS_API_KEY` - an API key from Google Console.
+-   `NETLIFY` - `true`
 
 <br>
 
