@@ -11,7 +11,7 @@ router.get("/ping", (_, response) => {
 })
 
 router.get("/player/:player", (_, response) => {
-    response.sendFile(__dirname + "/views/player.html")
+    response.sendFile(__dirname + "../public/player.html")
 })
 
 router.get("/stats/:season", async (request, response) => {
@@ -36,7 +36,9 @@ router.get("/raw-stats", async (request, response) => {
 async function sheetData() {
     return fetch(
         `https://sheets.googleapis.com/v4/spreadsheets/${process.env.SHEETS_ID}/values/C4:Q1000?key=${process.env.SHEETS_API_KEY}`
-    ).then(res => res.json())
+    )
+        .then(res => res.json())
+        .catch(err => err)
 }
 
 app.use("/.netlify/functions/app", router)
