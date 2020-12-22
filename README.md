@@ -56,25 +56,27 @@ This setup is easy for me to update when we play multiple games with the same lo
 
 The data is brought into the application through the Sheets API (v4).
 
-## Setup
+<br>
 
-Set two enviromental variables.
+## Deployment
+
+This application is deployed by Netlify.
+
+Set two environmental variables via the Netlify UI.
 
 -   `SHEETS_ID` - the id in the URL bar.
 -   `SHEETS_API_KEY` - an API key from Google Console.
 
+<br>
+
+## Local
+
 `npm i`
 
-`npm run start`
+`node server-local.js`
 
-Visit `/` in a browser!
+<br>
 
 ## Tests
 
 `npm test`
-
-## Deployment
-
-I run this project on glitch.com without any setup.
-
-You can import straight from this repository.
