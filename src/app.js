@@ -3,11 +3,14 @@ const express = require("express")
 const app = express()
 const router = express.Router()
 
+const seasons = require(`../public/seasons.json`)
 const { buildStats } = require("../stats")
-const { seasonFiles } = require("../config.json")
-const seasons = seasonFiles.map(file => require(`../public/seasons/${file}`))
 
-router.get("/player/:player", (request, response) => {
+router.get("/ping", (_, response) => {
+    response.send("OK")
+})
+
+router.get("/player/:player", (_, response) => {
     response.sendFile(__dirname + "/views/player.html")
 })
 
