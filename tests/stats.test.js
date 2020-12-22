@@ -1,4 +1,4 @@
-const { EloChange, buildStats } = require("./../stats")
+const { EloChange, buildStats } = require("../src/stats")
 const mockSheetsData = require("./mock-sheets-data.json")
 
 describe("Test EloChange", () => {
