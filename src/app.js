@@ -5,7 +5,6 @@ const router = express.Router()
 
 const seasons = require(`../public/seasons.json`)
 const { buildStats } = require("../stats")
-const { SHEETS_API_KEY, SHEETS_ID } = require("./env.json")
 
 router.get("/ping", (_, response) => {
     response.send("OK")
