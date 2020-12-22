@@ -39,17 +39,11 @@ router.get("/raw-stats", async (request, response) => {
 })
 
 async function sheetData() {
-    // For when we're live and kickin' in production
-    if (process.env.NETLIFY === "true") {
-        return fetch(
-            `https://sheets.googleapis.com/v4/spreadsheets/${process.env.SHEETS_ID}/values/C4:Q1000?key=${process.env.SHEETS_API_KEY}`
-        )
-            .then(res => res.json())
-            .catch(err => err)
-    }
-
-    // For local development
-    return new Promise(resolve => resolve(snapshot))
+    return fetch(
+        `https://sheets.googleapis.com/v4/spreadsheets/${process.env.SHEETS_ID}/values/C4:Q1000?key=${process.env.SHEETS_API_KEY}`
+    )
+        .then(res => res.json())
+        .catch(err => err)
 }
 
 app.use("/.netlify/functions/app", router)
