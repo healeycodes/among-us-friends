@@ -71,6 +71,14 @@ Set two environmental variables via the Netlify UI.
 
 ## Local Development
 
+Set the following environmental variable:
+
+-   `snapshot` - to `true`
+
+<br>
+
+Then run:
+
 `npm i`
 
 `node server-local.js`
@@ -81,7 +89,6 @@ To use live production data instead of the snapshot, set:
 
 -   `SHEETS_ID` - the id in the URL bar.
 -   `SHEETS_API_KEY` - an API key from Google Console.
--   `NETLIFY` - `true`
 
 <br>
 

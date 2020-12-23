@@ -39,6 +39,11 @@ router.get("/raw-stats", async (request, response) => {
 })
 
 async function sheetData() {
+    // For local dev set this variable
+    if (process.env.snapshot === "true") {
+        return new Promise(resolve => resolve(snapshot))
+    }
+    // Otherwise, we're on prod!
     return fetch(
         `https://sheets.googleapis.com/v4/spreadsheets/${process.env.SHEETS_ID}/values/C4:Q1000?key=${process.env.SHEETS_API_KEY}`
     )
