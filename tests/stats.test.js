@@ -53,14 +53,4 @@ describe("Test buildStats", () => {
         eloHistory.forEach(elo => expect(typeof elo).toBe("number"))
         done()
     })
-
-    test("It should have sensible deadlyDuos", done => {
-        const stats = buildStats(mockSheetsData)
-        expect(stats).toHaveProperty("deadlyDuos")
-
-        const deadlyDuos = stats.deadlyDuos
-        expect(deadlyDuos.length).toBe(1)
-        expect(deadlyDuos[0]).toBe("gem ✕ nads")
-        done()
-    })
 })

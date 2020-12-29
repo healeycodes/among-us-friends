@@ -28,6 +28,17 @@ router.get("/stats/:season", async (request, response) => {
     response.json(stats)
 })
 
+router.get("/wrapped", async (request, response) => {
+    let allStats = []
+    try {
+        allStats.push(buildStats(await sheetData()))
+    } catch (error) {
+        console.error(error)
+    }
+    seasons.forEach(season => allStats.push(buildStats(season)))
+    response.json(allStats)
+})
+
 router.get("/raw-stats", async (request, response) => {
     // Make the league's raw data open for all!
     try {

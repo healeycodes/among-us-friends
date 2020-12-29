@@ -1,9 +1,9 @@
 * {
     box-sizing: border-box;
-    font-family: "Inter", sans-serif;
 }
 
 body {
+    font-family: "Inter", sans-serif;
     padding-top: 5rem;
     margin: 2em 1em;
     line-height: 1.5em;
@@ -83,6 +83,34 @@ canvas {
 
 #season-select {
     margin-bottom: 50px;
+}
+
+.wrapped-choose-hider {
+    display: none;
+}
+
+.wrapped-choose-hider p {
+    display: inline;
+}
+
+.wrapped-choose-hider div {
+    margin: 1em 0;
+}
+
+.wrapped-display {
+    padding: 2em;
+    color: #fff;
+    font-family: "Montserrat", sans-serif;
+    width: 700px;
+}
+
+.wrapped-download {
+    display: none;
+    cursor: pointer;
+}
+
+.wrapped-share {
+    display: none;
 }
 
 @media only screen and (max-width: 414px) {

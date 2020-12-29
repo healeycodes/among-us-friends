@@ -89,6 +89,8 @@ function buildStats(data) {
                 season.mapData[map].crewLoss++
             }
         }
+
+        // Setup data to work out the Deadly Duos
         if (winner === "imposter") {
             season.duos[getImposterDuoTeamName(game)].win++
         } else {
@@ -171,20 +173,20 @@ function buildStats(data) {
         p => hidePlayers.includes(p.name) === false
     )
 
-    // Find out the highest number of duo wins
-    // Get all the duos with this number of wins
-    let deadlyDuos = []
-    let qualifyingWins = 0
+    // Which duo is the deadliest? Use a minimum number of wins then go by %
+    let minGames = 4
+    let allDeadlies = []
     Object.keys(season.duos).forEach(name => {
         const duo = season.duos[name]
-        qualifyingWins = Math.max(duo.win, qualifyingWins)
-    })
-    Object.keys(season.duos).forEach(name => {
-        const duo = season.duos[name]
-        if (qualifyingWins !== 0 && duo.win === qualifyingWins) {
-            deadlyDuos.push(name)
+        if (duo.win + duo.loss >= minGames) {
+            allDeadlies.push({
+                name: name,
+                winPercent: (duo.win / (duo.win + duo.loss)) * 100,
+            })
         }
     })
+    allDeadlies.sort((a, b) => b.winPercent - a.winPercent)
+    const deadlyDuos = allDeadlies.length > 0 ? [allDeadlies.shift().name] : []
 
     return {
         players: displayPlayers,

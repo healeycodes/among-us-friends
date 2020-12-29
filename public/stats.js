@@ -1,3 +1,10 @@
+function getAllStats() {
+    addLoadingIndicator()
+    return fetch(`.netlify/functions/app/wrapped`).then(response =>
+        response.json()
+    )
+}
+
 function getStats(select) {
     // We get called on page load or season change via dropdown
     let season
@@ -7,13 +14,15 @@ function getStats(select) {
         season = "current"
     }
 
-    // Add loading indicator
-    document.querySelector(".loading-indicator").innerHTML =
-        '<em class="loading">loading</em>'
-
+    addLoadingIndicator()
     return fetch(`.netlify/functions/app/stats/${season}`).then(response =>
         response.json()
     )
+}
+
+function addLoadingIndicator() {
+    document.querySelector(".loading-indicator").innerHTML =
+        '<em class="loading">loading</em>'
 }
 
 function getMap(map) {
