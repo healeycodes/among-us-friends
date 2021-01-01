@@ -84,7 +84,7 @@ function buildStats(data) {
             } else {
                 players[player].missedGames++ // increment missed games if not ingame
             }
-            if (players[player].missedGames > 30 && players[player].elo > 1200) players[player].elo-- // if too many misseed games decrement elo
+            if (players[player].missedGames > 30 && players[player].elo > 1200) players[player].elo-- // if too many missed games decrement elo
         }
 
         let imposters = game.slice(10, 12) // two player names
