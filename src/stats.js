@@ -12,9 +12,9 @@ function EloChange(games) {
     return function (playerA, playerB) {
         return [
             EloRating.calculate(playerA, playerB, true, K).playerRating -
-                playerA,
+            playerA,
             EloRating.calculate(playerA, playerB, false, K).playerRating -
-                playerA,
+            playerA,
         ]
     }
 }
@@ -51,6 +51,7 @@ function buildStats(data) {
                     elo: 1200,
                     eloHistory: [1200],
                     games: [],
+                    missedGames: 0,
                 }
             })
     )
@@ -74,10 +75,21 @@ function buildStats(data) {
 
     // Handle each game
     data.values.forEach(game => {
-        let crew = new Set(game.slice(0, 10).filter(isEmpty)) // nine or ten player names
+        let playerNames = game.slice(0, 10).filter(isEmpty) // nine or ten player names
+
+        for (const player in players) {
+            const inGame = new Set(playerNames)
+            if (inGame.has(player)) {
+                players[player].missedGames = 0 // reset missed games if ingame
+            } else {
+                players[player].missedGames++ // increment missed games if not ingame
+            }
+            if (players[player].missedGames > 30 && players[player].elo > 1200) players[player].elo-- // if too many misseed games decrement elo
+        }
+
         let imposters = game.slice(10, 12) // two player names
-        crew.delete(imposters[0])
-        crew.delete(imposters[1])
+        let crew = new Set(playerNames.filter(name => !imposters.includes(name)))
+
         let winner = game[12] // 'crew' or 'imposter'
         const map = game[13] // map short name
 
