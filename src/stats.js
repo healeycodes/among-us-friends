@@ -75,9 +75,11 @@ function buildStats(data) {
 
     // Handle each game
     data.values.forEach(game => {
-        let playersInGame = game.slice(0, 10).filter(isEmpty) // nine or ten player names
-        let imposters = game.slice(10, 12) // two player names
-        let crew = new Set(playersInGame.filter(name => !imposters.includes(name)))
+        let playersInGame = new Set(game.slice(0, 10).filter(isEmpty)) // nine or ten player names
+        let allPlayers = new Set(Object.keys(players))
+
+        let imposters = new Set(game.slice(10, 12)) // two player names
+        let crew = new Set([...playersInGame].filter(name => !imposters.has(name)))
 
         let winner = game[12] // 'crew' or 'imposter'
         const map = game[13] // map short name
@@ -103,11 +105,12 @@ function buildStats(data) {
             list.reduce((a, b) => a + players[b][role], 0) / list.length
 
         let crewAvgElo = avgElo([...crew], "crewElo")
-        let imposterAvgElo = avgElo(imposters, "imposterElo")
+        let imposterAvgElo = avgElo([...imposters], "imposterElo")
 
         // Handle elo changes
         playersInGame.forEach(name => {
             const player = players[name]
+            player.missStreak = 0
             const isCrew = crew.has(name)
             const wonGame = isCrew && winner === "crew" || !isCrew && winner === "imposter"
             const eloChange = EloChange(player.eloHistory.length)
@@ -139,11 +142,24 @@ function buildStats(data) {
             const diff = wonGame ? winDiff : lossDiff
             player.games.unshift({
                 crew: [...crew],
-                imposters,
+                imposters: [...imposters],
                 winner,
                 diff,
                 map,
             })
+        })
+
+        // handle elo changes for players missing games
+        playersNotInGame = [...allPlayers].filter(player => !playersInGame.has(player))
+        playersNotInGame.forEach(name => {
+            const player = players[name]
+            player.missStreak++
+            if (player.missStreak >= 40 && player.missStreak % 5 === 0 && player.elo > 1200) { 
+                player.crewElo -= 1 // if too many missed games decrement elo
+                player.imposterElo -= 1
+                player.elo = Math.round((player.crewElo + player.imposterElo) / 2)
+                player.eloHistory.push(player.elo)
+            }
         })
     })
 
