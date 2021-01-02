@@ -111,9 +111,10 @@ function buildStats(data) {
             const isCrew = crew.has(name)
             const wonGame = isCrew && winner === "crew" || !isCrew && winner === "imposter"
             const eloChange = EloChange(player.eloHistory.length)
+            let winDiff, lossDiff
 
             if (isCrew) {
-                var [winDiff, lossDiff] = eloChange(player.crewElo, imposterAvgElo)
+                [winDiff, lossDiff] = eloChange(player.crewElo, imposterAvgElo)
                 if (wonGame) {
                     player.crewWin += 1
                     player.crewElo += winDiff
@@ -122,7 +123,7 @@ function buildStats(data) {
                     player.crewElo += lossDiff
                 }
             } else {
-                var [winDiff, lossDiff] = eloChange(player.imposterElo, crewAvgElo)
+                [winDiff, lossDiff] = eloChange(player.imposterElo, crewAvgElo)
                 if (wonGame) {
                     player.imposterWin += 1
                     player.imposterElo += winDiff
