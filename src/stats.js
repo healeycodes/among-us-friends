@@ -98,14 +98,6 @@ function buildStats(data) {
             season.duos[getImposterDuoTeamName(game)].loss++
         }
 
-        // Decay elo when games missed
-        const inGame = new Set(playersInGame)
-        Object.keys(players).forEach(name => {
-            const player = players[name]
-            inGame.has(name) ? player.missStreak = 0 : player.missStreak++ // reset or increment miss game streak if ingame
-            if (player.missStreak > 40 && player.elo > 1200) player.elo -= 0.5 // if too many missed games decrement elo
-        })
-
         // Players are measured against the average of the other team
         const avgElo = (list, role) =>
             list.reduce((a, b) => a + players[b][role], 0) / list.length
