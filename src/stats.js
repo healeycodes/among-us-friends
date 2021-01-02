@@ -149,7 +149,7 @@ function buildStats(data) {
             })
         })
 
-        // handle elo changes for players missing games
+        // Handle elo changes for players missing games
         playersNotInGame = [...allPlayers].filter(player => !playersInGame.has(player))
         playersNotInGame.forEach(name => {
             const player = players[name]
