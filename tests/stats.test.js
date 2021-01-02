@@ -23,7 +23,7 @@ describe("Test buildStats", () => {
         const firstPlayer = stats.players[0]
         expect(firstPlayer.crewLoss).toStrictEqual(0)
         expect(firstPlayer.crewWin).toStrictEqual(1)
-        expect(firstPlayer.elo).toStrictEqual(1220)
+        expect(firstPlayer.elo).toStrictEqual(1221)
         expect(typeof firstPlayer.eloHistory.length).toStrictEqual("number")
         expect(firstPlayer.games.length).toStrictEqual(2)
         expect(firstPlayer.imposterLoss).toStrictEqual(0)
