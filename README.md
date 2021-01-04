@@ -17,15 +17,27 @@ Features:
 -   Seasons
 -   Google Sheets as a datastore
 
+Tech:
+
 It's a Jamstack application which runs Express via Netlify Lambda. Tested by Jest.
 
 The frontend is vanilla JS/CSS.
+
+<hr>
 
 ![Win rates and loss rates, and an ELO graph](https://github.com/healeycodes/among-us-friends/blob/main/public/preview.png)
 
 <br>
 
 ## Google Sheets
+
+
+Sheets should be named in the following format:
+
+-   `Current` — the season in-progress
+-   `Season X` — where `X` is an incrementing integer starting at `1`
+
+<br>
 
 ![A Google Sheets file](https://github.com/healeycodes/among-us-friends/blob/main/public/sheets.png)
 
@@ -54,13 +66,6 @@ E.g.
 
 "skeld" <-- map shortname (skeld, mira, polus, airship)
 ```
-
-<br>
-
-Sheets should be named in the following format:
-
--   `Current` — the season in-progress
--   `Season X` — where `X` is an incrementing integer starting at `1`
 
 <br>
 
