@@ -7,18 +7,6 @@ const mockResponse = new Response(JSON.stringify(mockSheetsData))
 const request = require("supertest")
 const app = require("../src/app")
 
-describe("Test the ping path", () => {
-    fetch.mockReturnValue(Promise.resolve(mockResponse))
-    test("It should response to the GET method", done => {
-        request(app)
-            .get("/.netlify/functions/app/ping")
-            .then(response => {
-                expect(response.statusCode).toBe(200)
-                done()
-            })
-    })
-})
-
 describe("Test the stats path", () => {
     fetch.mockReturnValue(Promise.resolve(mockResponse))
     test("It should response to the GET method", done => {
