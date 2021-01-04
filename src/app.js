@@ -5,12 +5,7 @@ const app = express()
 const router = express.Router()
 
 const snapshot = require("../public/dev-snapshot.json")
-const seasons = require("../public/seasons.json")
 const { buildStats } = require("./stats")
-
-router.get("/ping", (_, response) => {
-    response.send("OK")
-})
 
 router.get("/stats/:season", async (request, response) => {
     const season = request.params.season
@@ -22,21 +17,14 @@ router.get("/stats/:season", async (request, response) => {
             console.error(error)
         }
     } else {
-        data = seasons[parseInt(season)]
+        try {
+            data = await sheetData(`Season ${parseInt(season)}`)
+        } catch (error) {
+            console.error(error)
+        }
     }
     const stats = buildStats(data)
     response.json(stats)
-})
-
-router.get("/wrapped", async (request, response) => {
-    let allStats = []
-    try {
-        allStats.push(buildStats(await sheetData()))
-    } catch (error) {
-        console.error(error)
-    }
-    seasons.forEach(season => allStats.push(buildStats(season)))
-    response.json(allStats)
 })
 
 router.get("/raw-stats", async (request, response) => {
@@ -49,15 +37,14 @@ router.get("/raw-stats", async (request, response) => {
     }
 })
 
-async function sheetData() {
+async function sheetData(sheet = "Current") {
     // For local dev set this variable
     if (process.env.snapshot === "true") {
         return new Promise(resolve => resolve(snapshot))
     }
     // Otherwise, we're on prod!
-    return fetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${process.env.SHEETS_ID}/values/C4:Q1000?key=${process.env.SHEETS_API_KEY}`
-    )
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${process.env.SHEETS_ID}/values/${sheet}!C4:Q1000?key=${process.env.SHEETS_API_KEY}`
+    return fetch(url)
         .then(res => res.json())
         .catch(err => err)
 }

@@ -12,9 +12,9 @@ function EloChange(games) {
     return function (playerA, playerB) {
         return [
             EloRating.calculate(playerA, playerB, true, K).playerRating -
-            playerA,
+                playerA,
             EloRating.calculate(playerA, playerB, false, K).playerRating -
-            playerA,
+                playerA,
         ]
     }
 }
@@ -29,6 +29,11 @@ function getImposterDuoTeamName(game) {
 //       'playerF', 'playerG', 'playerH', 'playerI', '', <-- allow for nine or ten players
 //       'playerA', 'playerB', 'crew'] <-- two imposters, and the winner 'crew' or 'imposter'
 function buildStats(data) {
+    if (data.values === undefined) {
+        // Perhaps the season has just started and there have been no games
+        return null
+    }
+
     // We use this to filter out empty slots in a row (e.g. when there are nine players)
     const isEmpty = name => name !== ""
 
@@ -79,7 +84,9 @@ function buildStats(data) {
         let allPlayers = new Set(Object.keys(players))
 
         let imposters = new Set(game.slice(10, 12)) // two player names
-        let crew = new Set([...playersInGame].filter(name => !imposters.has(name)))
+        let crew = new Set(
+            [...playersInGame].filter(name => !imposters.has(name))
+        )
 
         let winner = game[12] // 'crew' or 'imposter'
         const map = game[13] // map short name
@@ -112,12 +119,14 @@ function buildStats(data) {
             const player = players[name]
             player.missStreak = 0
             const isCrew = crew.has(name)
-            const wonGame = isCrew && winner === "crew" || !isCrew && winner === "imposter"
+            const wonGame =
+                (isCrew && winner === "crew") ||
+                (!isCrew && winner === "imposter")
             const eloChange = EloChange(player.eloHistory.length)
             let winDiff, lossDiff
 
             if (isCrew) {
-                [winDiff, lossDiff] = eloChange(player.crewElo, imposterAvgElo)
+                ;[winDiff, lossDiff] = eloChange(player.crewElo, imposterAvgElo)
                 if (wonGame) {
                     player.crewWin += 1
                     player.crewElo += winDiff
@@ -126,7 +135,7 @@ function buildStats(data) {
                     player.crewElo += lossDiff
                 }
             } else {
-                [winDiff, lossDiff] = eloChange(player.imposterElo, crewAvgElo)
+                ;[winDiff, lossDiff] = eloChange(player.imposterElo, crewAvgElo)
                 if (wonGame) {
                     player.imposterWin += 1
                     player.imposterElo += winDiff
@@ -136,7 +145,7 @@ function buildStats(data) {
                 }
             }
 
-            isCrew ? player.crewElo += 0.5 : player.imposterElo += 0.5 // inflate elo of ingame players to reward playing
+            isCrew ? (player.crewElo += 0.5) : (player.imposterElo += 0.5) // inflate elo of ingame players to reward playing
             player.elo = Math.round((player.crewElo + player.imposterElo) / 2)
             player.eloHistory.push(player.elo)
             const diff = wonGame ? winDiff : lossDiff
@@ -150,14 +159,22 @@ function buildStats(data) {
         })
 
         // Handle elo changes for players missing games
-        playersNotInGame = [...allPlayers].filter(player => !playersInGame.has(player))
+        playersNotInGame = [...allPlayers].filter(
+            player => !playersInGame.has(player)
+        )
         playersNotInGame.forEach(name => {
             const player = players[name]
             player.missStreak++
-            if (player.missStreak >= 40 && player.missStreak % 5 === 0 && player.elo > 1200) { 
+            if (
+                player.missStreak >= 40 &&
+                player.missStreak % 5 === 0 &&
+                player.elo > 1200
+            ) {
                 player.crewElo -= 1 // if too many missed games decrement elo
                 player.imposterElo -= 1
-                player.elo = Math.round((player.crewElo + player.imposterElo) / 2)
+                player.elo = Math.round(
+                    (player.crewElo + player.imposterElo) / 2
+                )
                 player.eloHistory.push(player.elo)
             }
         })

@@ -40,7 +40,8 @@
       <label for="season-select">Change season:</label>
       <select name="season" id="season-select" onchange="getStats(this).then(json => load(json))">
         <option value="current">Current season</option>
-        <option value="0">One</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
       </select>
       <p id="season-stats"><p>
       <div class="loading-indicator"></div>
