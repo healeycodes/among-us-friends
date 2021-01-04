@@ -187,10 +187,10 @@ function buildStats(data) {
 
     // Segment those in their placements, move to end of the list
     let placements = playersSortedByElo.filter(
-        p => p.eloHistory.length <= PLACEMENT_GAMES
+        p => p.games.length <= PLACEMENT_GAMES
     )
     playersSortedByElo = playersSortedByElo
-        .filter(p => p.eloHistory.length > PLACEMENT_GAMES)
+        .filter(p => p.games.length > PLACEMENT_GAMES)
         .concat(placements)
 
     // Hide players who have requested to not be ranked

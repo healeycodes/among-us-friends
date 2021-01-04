@@ -52,7 +52,7 @@ function load(json) {
                 ? `<li>👹&nbsp;&nbsp;win ${imposterWin}, loss ${imposterLoss}, win rate of ${imposterWinRate}%</li>`
                 : ""
 
-        const elo = player.eloHistory.length <= 10 ? "~" : player.elo
+        const elo = player.games.length <= 10 ? "~" : player.elo
         newListItem.innerHTML = `<div class="player">
 <h5><small>#${rank + 1}</small> <a href="player.html?name=${player.name}">${
             player.name
