@@ -8,7 +8,7 @@
     <link id="favicon" rel="icon" href="/crew.png"/>
     <title>Among Us League!</title>
 
-    <link rel="stylesheet" href="/style.css"/>
+    <link rel="stylesheet" href="css/base.css"/>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
@@ -24,9 +24,9 @@
       src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
       defer
     ></script>
-    <script src="/stats.js" defer></script>
-    <script src="/graph.js" defer></script>
-    <script src="/home.js" defer></script>
+    <script src="/js/stats.js" defer></script>
+    <script src="/js/graph.js" defer></script>
+    <script src="/js/home.js" defer></script>
   </head>
   <body>
     <header class="container">
@@ -36,27 +36,12 @@
     </header>
 
     <main class="container">
-      <p>🆕 <a href="/wrap-up.html">Check out your 2020 Wrapped</a></p>
-      <details class="elo-explainer">
-        <summary>
-          <i>How are the rankings calculated?</i>
-        </summary>
-        <p>
-          Players have a hidden crew Elo and a hidden imposter Elo. These values increase or decrese depending on the opposing team's average Elo. These two values are then averaged to get a general rating.
-        </p>
-        <p>
-          Q. Why aren't your teammates taken into account?<br>
-          A. Because it leads to Elo inflation.<br>
-          <br>
-          Q. Which matters more: your crew or imposter performance?<br>
-          A. They matter equally.<br>
-        </p>
-      </details>
       <label for="season-select">Change season:</label>
 
       <select name="season" id="season-select" onchange="getStats(this).then(json => load(json))">
         <option value="current">Current season</option>
-        <option value="0">One</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
       </select>
       <p id="season-stats"></p>
       <section class="stats">

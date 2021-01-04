@@ -123,6 +123,10 @@ canvas {
     }
 }
 
+.loading {
+    color: gray;
+}
+
 .loading:after {
     display: inline-block;
     animation: dotty steps(1, end) 1s infinite;

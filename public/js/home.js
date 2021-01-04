@@ -1,11 +1,15 @@
 const statsList = document.getElementById("stats")
+const loadingIndicator = document.querySelector(".loading-indicator")
 
 function load(json) {
     // Remove loading text and any old data
-    document.querySelector(".loading-indicator").innerHTML = ""
+    loadingIndicator.innerHTML = ""
     document.querySelectorAll(".player-row").forEach(elem => elem.remove())
 
     const seasonStats = document.querySelector("#season-stats")
+    if (json === null) {
+        loadingIndicator.innerHTML = "It's a new season. Go play some games!"
+    }
     seasonStats.innerHTML = `There have been ${json.season.totalGames} games played.`
     Object.keys(json.season.mapData).forEach(map => {
         const crewWin = json.season.mapData[map].crewWin

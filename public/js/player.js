@@ -1,10 +1,15 @@
 const playerElo = document.querySelector("#player-elo")
 const playerList = document.querySelector(".player")
+const loadingIndicator = document.querySelector(".loading-indicator")
 
 function load(json) {
     // Remove loading text and any old data
-    document.querySelector(".loading-indicator").innerHTML = ""
+    loadingIndicator.innerHTML = ""
     document.querySelectorAll(".games-list").forEach(elem => elem.remove())
+
+    if (json === null) {
+        loadingIndicator.innerHTML = "It's a new season. Go play some games!"
+    }
 
     const urlParams = new URLSearchParams(window.location.search)
     const name = urlParams.get("name")
