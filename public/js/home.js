@@ -22,7 +22,7 @@ function load(json) {
         )}.`
     })
     if (json.deadlyDuos.length > 0) {
-        seasonStats.innerHTML += `<br/>The deadliest imposter ${
+        seasonStats.innerHTML += `<br/>The deadliest impostor ${
             json.deadlyDuos.length > 1 ? "duos are" : "duo is"
         } ${json.deadlyDuos.join(", ")}.`
     }
@@ -37,19 +37,19 @@ function load(json) {
         let crewWinRate = parseFloat(
             (crewWin / (crewWin + crewLoss)) * 100
         ).toFixed(2)
-        const imposterWin = player.imposterWin
-        const imposterLoss = player.imposterLoss
-        let imposterWinRate = parseFloat(
-            (imposterWin / (imposterWin + imposterLoss)) * 100
+        const impostorWin = player.impostorWin
+        const impostorLoss = player.impostorLoss
+        let impostorWinRate = parseFloat(
+            (impostorWin / (impostorWin + impostorLoss)) * 100
         ).toFixed(2)
 
         const crewText =
             crewWin + crewLoss > 0
                 ? `<li>😇&nbsp;&nbsp;win ${crewWin}, loss ${crewLoss}, win rate of ${crewWinRate}%</li>`
                 : ""
-        const imposterText =
-            imposterWin + imposterLoss > 0
-                ? `<li>👹&nbsp;&nbsp;win ${imposterWin}, loss ${imposterLoss}, win rate of ${imposterWinRate}%</li>`
+        const impostorText =
+            impostorWin + impostorLoss > 0
+                ? `<li>👹&nbsp;&nbsp;win ${impostorWin}, loss ${impostorLoss}, win rate of ${impostorWinRate}%</li>`
                 : ""
 
         const elo = player.games.length <= 10 ? "~" : player.elo
@@ -59,7 +59,7 @@ function load(json) {
         }</a> <small>(<code>${elo}</code>)</small></h5>
 <ul style="list-style-type: none; padding-bottom: 1em;">
 ${crewText}
-${imposterText}
+${impostorText}
 </ul>
 </div>
 <div class="player-graph">

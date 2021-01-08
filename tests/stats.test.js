@@ -26,8 +26,8 @@ describe("Test buildStats", () => {
         expect(firstPlayer.elo).toStrictEqual(1337)
         expect(typeof firstPlayer.eloHistory.length).toStrictEqual("number")
         expect(firstPlayer.games.length).toStrictEqual(46)
-        expect(firstPlayer.imposterLoss).toStrictEqual(0)
-        expect(firstPlayer.imposterWin).toStrictEqual(45)
+        expect(firstPlayer.impostorLoss).toStrictEqual(0)
+        expect(firstPlayer.impostorWin).toStrictEqual(45)
         expect(firstPlayer.name).toStrictEqual("nads")
 
         const firstGame = firstPlayer.games[firstPlayer.games.length - 1]
@@ -37,8 +37,8 @@ describe("Test buildStats", () => {
 
         expect(firstGame.crew.length).toStrictEqual(8)
         expect(firstGame.crew[0]).toStrictEqual("andy")
-        expect(firstGame.imposters.length).toStrictEqual(2)
-        expect(firstGame.imposters[0]).toStrictEqual("ally")
+        expect(firstGame.impostors.length).toStrictEqual(2)
+        expect(firstGame.impostors[0]).toStrictEqual("ally")
         done()
     })
 

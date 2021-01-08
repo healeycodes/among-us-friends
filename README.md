@@ -43,7 +43,7 @@ Sheets should be named in the following format:
 
 Enter data starting at C4 downwards. The rows should be 14 cells long.
 
-10 player slots (which should be left empty if you have less than 10), 2 slots for the imposters (the names are repeated from the player list), 1 slot for the winner ('crew' or 'imposter'), and 1 slot for the map short name.
+10 player slots (which should be left empty if you have less than 10), 2 slots for the impostors (the names are repeated from the player list), 1 slot for the winner ('crew' or 'impostor'), and 1 slot for the map short name.
 
 E.g.
 
@@ -59,10 +59,10 @@ E.g.
 "gem"
 "" <-- empty if you have nine players
 
-"ally" -- imposters
+"ally" -- impostors
 "spon"
 
-"crew" <-- game winner (crew, imposter)
+"crew" <-- game winner (crew, impostor)
 
 "skeld" <-- map shortname (skeld, mira, polus, airship)
 ```
