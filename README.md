@@ -18,13 +18,13 @@ There is a provisional ELO system, and graphs powered by Chart.js. The backend i
 
 <br>
 
-The data source is a Google Sheets file where I store the crew names, imposter names, and the winner (crew/imposter).
+The data source is a Google Sheets file where I store the crew names, impostor names, and the winner (crew/impostor).
 
 ![A Google Sheets file](https://github.com/healeycodes/among-us-friends/blob/main/public/sheets.png)
 
 Enter data starting at C4 downwards. The rows should be 14 cells long.
 
-10 player slots (which should be left empty if you have less than 10), 2 slots for the imposters (the names are repeated from the player list), 1 slot for the winner ('crew' or 'imposter'), and 1 slot for the map short name.
+10 player slots (which should be left empty if you have less than 10), 2 slots for the impostors (the names are repeated from the player list), 1 slot for the winner ('crew' or 'impostor'), and 1 slot for the map short name.
 
 E.g.
 
@@ -40,7 +40,7 @@ E.g.
 "gem"
 "" <-- empty if you have nine players
 
-"ally" -- imposters
+"ally" -- impostors
 "spon"
 
 "crew" <-- game winner

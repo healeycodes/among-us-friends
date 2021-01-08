@@ -11,7 +11,7 @@ function load(json) {
 
     const player = json.players.filter(p => p.name === name)[0]
     const elo = player.elo
-    let imposterGames = 0
+    let impostorGames = 0
 
     playerElo.innerHTML = ` - ${name} (<code>${elo}</code>)`
 
@@ -31,17 +31,17 @@ function load(json) {
                 : '<b class="red">LOSS</b>'
         }</b> <code>${game.diff > 0 ? "+" + game.diff : "" + game.diff}</code>${
             map ? `<br/>${map}` : ""
-        }<br/>👹 ${game.imposters.join(" ")}<br/>😇 ${game.crew.join(" ")}`
+        }<br/>👹 ${game.impostors.join(" ")}<br/>😇 ${game.crew.join(" ")}`
         gamesList.appendChild(gameElem)
-        if (game.imposters.includes(name)) {
-            imposterGames++
+        if (game.impostors.includes(name)) {
+            impostorGames++
         }
     })
     playerList.appendChild(gamesList)
 
     const seasonStats = document.querySelector("#season-stats")
-    seasonStats.innerHTML = `${name} gets imposter ${parseFloat(
-        (imposterGames / player.games.length) * 100
+    seasonStats.innerHTML = `${name} gets impostor ${parseFloat(
+        (impostorGames / player.games.length) * 100
     ).toFixed(2)}% of the time this season.`
 }
 

@@ -26,17 +26,17 @@ describe("Test buildStats", () => {
         expect(firstPlayer.elo).toStrictEqual(1220)
         expect(typeof firstPlayer.eloHistory.length).toStrictEqual("number")
         expect(firstPlayer.games.length).toStrictEqual(2)
-        expect(firstPlayer.imposterLoss).toStrictEqual(0)
-        expect(firstPlayer.imposterWin).toStrictEqual(1)
+        expect(firstPlayer.impostorLoss).toStrictEqual(0)
+        expect(firstPlayer.impostorWin).toStrictEqual(1)
         expect(firstPlayer.name).toStrictEqual("nads")
 
         const firstGame = firstPlayer.games[0]
         expect(firstGame.diff).toStrictEqual(20) // Crew ELO diff
-        expect(stats.players[9].games[1].diff).toStrictEqual(-20) // Imposter ELO diff
+        expect(stats.players[9].games[1].diff).toStrictEqual(-20) // Impostor ELO diff
         expect(firstGame.crew.length).toStrictEqual(8)
         expect(firstGame.crew[0]).toStrictEqual("andy")
-        expect(firstGame.imposters.length).toStrictEqual(2)
-        expect(firstGame.imposters[0]).toStrictEqual("gem")
+        expect(firstGame.impostors.length).toStrictEqual(2)
+        expect(firstGame.impostors[0]).toStrictEqual("gem")
         done()
     })
 

@@ -19,15 +19,15 @@ function EloChange(games) {
     }
 }
 
-function getImposterDuoTeamName(game) {
+function getImpostorDuoTeamName(game) {
     return game.slice(10, 12).sort().join(" ✕ ")
 }
 
 // Given a raw list of matches in the form of a row of:
-// ten slots for players, two slots for imposters, one slot for winner
+// ten slots for players, two slots for impostors, one slot for winner
 // e.g. ['playerA', 'playerB', 'playerC', 'playerD', 'playerE',
 //       'playerF', 'playerG', 'playerH', 'playerI', '', <-- allow for nine or ten players
-//       'playerA', 'playerB', 'crew'] <-- two imposters, and the winner 'crew' or 'imposter'
+//       'playerA', 'playerB', 'crew'] <-- two impostors, and the winner 'crew' or 'impostor'
 function buildStats(data) {
     // We use this to filter out empty slots in a row (e.g. when there are nine players)
     const isEmpty = name => name !== ""
@@ -44,10 +44,10 @@ function buildStats(data) {
                     name: player,
                     crewWin: 0,
                     crewLoss: 0,
-                    imposterWin: 0,
-                    imposterLoss: 0,
+                    impostorWin: 0,
+                    impostorLoss: 0,
                     crewElo: 1200,
-                    imposterElo: 1200,
+                    impostorElo: 1200,
                     elo: 1200,
                     eloHistory: [1200],
                     games: [],
@@ -66,7 +66,7 @@ function buildStats(data) {
         if (map !== undefined) {
             season.mapData[map] = { crewWin: 0, crewLoss: 0 }
         }
-        season.duos[getImposterDuoTeamName(game)] = {
+        season.duos[getImpostorDuoTeamName(game)] = {
             win: 0,
             loss: 0,
         }
@@ -75,10 +75,10 @@ function buildStats(data) {
     // Handle each game
     data.values.forEach(game => {
         let crew = new Set(game.slice(0, 10).filter(isEmpty)) // nine or ten player names
-        let imposters = game.slice(10, 12) // two player names
-        crew.delete(imposters[0])
-        crew.delete(imposters[1])
-        let winner = game[12] // 'crew' or 'imposter'
+        let impostors = game.slice(10, 12) // two player names
+        crew.delete(impostors[0])
+        crew.delete(impostors[1])
+        let winner = game[12] // 'crew' or 'impostor'
         const map = game[13] // map short name
 
         // Handle overall season stats
@@ -89,10 +89,10 @@ function buildStats(data) {
                 season.mapData[map].crewLoss++
             }
         }
-        if (winner === "imposter") {
-            season.duos[getImposterDuoTeamName(game)].win++
+        if (winner === "impostor") {
+            season.duos[getImpostorDuoTeamName(game)].win++
         } else {
-            season.duos[getImposterDuoTeamName(game)].loss++
+            season.duos[getImpostorDuoTeamName(game)].loss++
         }
 
         // Players are measured against the average of the other team
@@ -100,7 +100,7 @@ function buildStats(data) {
             list.reduce((a, b) => a + players[b][role], 0) / list.length
 
         let crewAvgElo = avgElo([...crew], "crewElo")
-        let imposterAvgElo = avgElo(imposters, "imposterElo")
+        let impostorAvgElo = avgElo(impostors, "impostorElo")
 
         // Handle crew
         crew.forEach(crewmate => {
@@ -108,44 +108,44 @@ function buildStats(data) {
             const eloChange = EloChange(player.eloHistory.length)
             let diff
             if (winner === "crew") {
-                diff = eloChange(player.crewElo, imposterAvgElo)[0]
+                diff = eloChange(player.crewElo, impostorAvgElo)[0]
                 player.crewWin += 1
                 player.crewElo += diff
             } else {
-                diff = eloChange(player.crewElo, imposterAvgElo)[1]
+                diff = eloChange(player.crewElo, impostorAvgElo)[1]
                 player.crewLoss += 1
                 player.crewElo += diff
             }
-            player.elo = (player.crewElo + player.imposterElo) / 2
+            player.elo = (player.crewElo + player.impostorElo) / 2
             player.eloHistory.push(player.elo)
             player.games.unshift({
                 crew: [...crew],
-                imposters,
+                impostors,
                 winner,
                 diff,
                 map,
             })
         })
 
-        // Handle imposters
-        imposters.forEach(imposter => {
-            const player = players[imposter]
+        // Handle impostors
+        impostors.forEach(impostor => {
+            const player = players[impostor]
             const eloChange = EloChange(player.eloHistory.length)
             let diff
-            if (winner === "imposter") {
-                diff = eloChange(player.imposterElo, crewAvgElo)[0]
-                player.imposterWin += 1
-                player.imposterElo += diff
+            if (winner === "impostor") {
+                diff = eloChange(player.impostorElo, crewAvgElo)[0]
+                player.impostorWin += 1
+                player.impostorElo += diff
             } else {
-                diff = eloChange(player.imposterElo, crewAvgElo)[1]
-                player.imposterLoss += 1
-                player.imposterElo += diff
+                diff = eloChange(player.impostorElo, crewAvgElo)[1]
+                player.impostorLoss += 1
+                player.impostorElo += diff
             }
-            player.elo = (player.crewElo + player.imposterElo) / 2
+            player.elo = (player.crewElo + player.impostorElo) / 2
             player.eloHistory.push(player.elo)
             player.games.unshift({
                 crew: [...crew],
-                imposters,
+                impostors,
                 winner,
                 diff,
                 map,
