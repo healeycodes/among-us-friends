@@ -1,4 +1,3 @@
-const path = require("path")
 const fetch = require("node-fetch").default
 const express = require("express")
 const app = express()
@@ -9,22 +8,18 @@ const { buildStats } = require("./stats")
 
 router.get("/stats/:season", async (request, response) => {
     const season = request.params.season
-    let data
-    if (season === "current") {
-        try {
-            data = await sheetData()
-        } catch (error) {
-            console.error(error)
-        }
-    } else {
-        try {
-            data = await sheetData(`Season ${parseInt(season)}`)
-        } catch (error) {
-            console.error(error)
-        }
+    let query = ""
+    if (season !== "current") {
+        query = `Season ${parseInt(season)}`
     }
-    const stats = buildStats(data)
-    response.json(stats)
+
+    try {
+        const data = await sheetData(query)
+        const stats = buildStats(data)
+        response.json(stats)
+    } catch (error) {
+        console.error(error)
+    }
 })
 
 router.get("/raw-stats", async (request, response) => {
