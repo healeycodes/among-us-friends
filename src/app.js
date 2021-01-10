@@ -22,10 +22,16 @@ router.get("/stats/:season", async (request, response) => {
     }
 })
 
-router.get("/raw-stats", async (request, response) => {
+router.get("/raw-stats/:season", async (request, response) => {
     // Make the league's raw data open for all!
+    const season = request.params.season
+    let query = ""
+    if (season !== "current") {
+        query = `Season ${parseInt(season)}`
+    }
+
     try {
-        const data = await sheetData()
+        const data = await sheetData(query)
         response.json(data)
     } catch (error) {
         console.error(error)
