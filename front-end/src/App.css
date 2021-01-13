@@ -1,0 +1,7 @@
+*:not(text) {
+  font-family: Inter, sans-serif;
+}
+
+.active-link {
+  text-decoration: underline;
+}

@@ -7,11 +7,13 @@
   "description": "An among us league for my friends.",
   "main": "server.js",
   "scripts": {
+    "dev": "node server-local.js",
     "start": "node server.js",
     "test": "jest",
     "build": "netlify-lambda build src --config ./webpack.functions.js"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "elo-rating": "^1.0.1",
     "encoding": "^0.1.13",
     "express": "^4.17.1",
@@ -22,7 +24,7 @@
     "supertest": "^6.0.0"
   },
   "engines": {
-    "node": "12.x"
+    "node": "14.x"
   },
   "repository": {
     "url": "https://glitch.com/edit/#!/hello-express"

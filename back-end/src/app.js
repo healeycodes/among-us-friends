@@ -1,17 +1,20 @@
+require("dotenv").config()
 const fetch = require("node-fetch").default
 const express = require("express")
 const app = express()
 const router = express.Router()
 
-const snapshot = require("../public/dev-snapshot.json")
+const { seasons } = require("../../config.json")
+const snapshot = require("../dev-snapshot.json")
 const { buildStats } = require("./stats")
 
 router.get("/stats/:season", async (request, response) => {
     const season = request.params.season
-    let query = ""
-    if (season !== "current") {
-        query = `Season ${parseInt(season)}`
+    let query = `Season ${season}`
+    if (season === "0") {
+        query = `Season ${seasons[seasons.length - 1]}`
     }
+    console.log(query)
 
     try {
         const data = await sheetData(query)

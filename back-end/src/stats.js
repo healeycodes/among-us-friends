@@ -1,4 +1,4 @@
-const { hidePlayers } = require("../config.json")
+const { hidePlayers, seasons } = require("../../config.json")
 const EloRating = require("elo-rating")
 
 const PLACEMENT_GAMES = 10
@@ -235,6 +235,7 @@ function buildStats(data) {
     return {
         players: displayPlayers,
         season,
+        seasons,
         deadlyDuos,
     }
 }
