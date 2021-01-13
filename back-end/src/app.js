@@ -14,7 +14,6 @@ router.get("/stats/:season", async (request, response) => {
     if (season === "0") {
         query = `Season ${seasons[seasons.length - 1]}`
     }
-    console.log(query)
 
     try {
         const data = await sheetData(query)
