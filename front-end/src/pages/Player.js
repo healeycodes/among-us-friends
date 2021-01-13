@@ -2,10 +2,11 @@ import {
     useParams
 } from "react-router-dom"
 
-import Summary from './Summary'
+import Summary from '../components/Summary'
 import { getMap } from '../Api'
 
 export default function Player(props) {
+    console.log(props)
     const { players } = props
     const { id } = useParams()
 

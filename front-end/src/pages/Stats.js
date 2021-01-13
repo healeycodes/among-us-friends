@@ -1,6 +1,7 @@
 import { getMap } from '../Api'
 
-export default function Maps(props) {
+export default function Stats(props) {
+    console.log(props)
     const { season, deadlyDuos } = props
 
     return (

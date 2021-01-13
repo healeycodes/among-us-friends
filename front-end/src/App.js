@@ -6,10 +6,10 @@ import {
     NavLink,
 } from "react-router-dom"
 
-import About from './components/About'
-import Rankings from './components/Rankings'
-import Player from './components/Player'
-import Stats from './components/Stats'
+import About from './pages/About'
+import Rankings from './pages/Rankings'
+import Player from './pages/Player'
+import Stats from './pages/Stats'
 import { getStats } from './Api'
 
 import 'water.css/out/light.css'

@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-import Summary from './Summary'
+import Summary from '../components/Summary'
 
 export default function Rankings(props) {
     const { players } = props
