@@ -2,5 +2,11 @@
     "hidePlayers": [
         "mads",
         "mini"
+    ],
+    "//seasons": "including the current season",
+    "seasons": [
+        1,
+        2,
+        3
     ]
 }

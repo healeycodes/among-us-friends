@@ -1,0 +1,7 @@
+# dependencies
+/node_modules
+
+# misc
+/functions
+.DS_Store
+.env
