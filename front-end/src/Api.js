@@ -16,11 +16,12 @@ async function callStats(query) {
 
 export async function getStats(seasonName) {
     const stats = await callStats(seasonName)
-    const { season, seasons, players } = stats
+    const { season, seasons, players, deadlyDuos } = stats
 
     return {
         players,
         season,
-        seasons
+        seasons,
+        deadlyDuos
     }
 }

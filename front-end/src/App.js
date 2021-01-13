@@ -9,7 +9,7 @@ import {
 import About from './components/About'
 import Rankings from './components/Rankings'
 import Player from './components/Player'
-import Maps from './components/Maps'
+import Stats from './components/Stats'
 import { getStats } from './Api'
 
 import 'water.css/out/light.css'
@@ -44,7 +44,7 @@ export default function App() {
             })
     }
 
-    const { players, season, seasons } = stats
+    const { players, season, seasons, deadlyDuos } = stats
     return (
         <Router>
             <header>
@@ -57,14 +57,14 @@ export default function App() {
                             <NavLink exact activeClassName="active-link" to="/">Rankings</NavLink>
                         </li>
                         <li style={{ display: 'inline', marginRight: '12px' }}>
-                            <NavLink activeClassName="active-link" to="/maps">Maps</NavLink>
+                            <NavLink activeClassName="active-link" to="/stats">Stats</NavLink>
                         </li>
                         <li style={{ display: 'inline', marginRight: '12px' }}>
                             <NavLink activeClassName="active-link" to="/about">About</NavLink>
                         </li>
                         {currentSeasonName !== '0' &&
-                            <li style={{ display: 'inline', float: 'right' }}>
-                                <select style={{ marginTop: '-12px' }} disabled={loading} value={currentSeasonName} onChange={(event) => handleSeasonChange(event.target.value)}>
+                            <li className="season-list" style={{ display: 'inline', float: 'right' }}>
+                                <select style={{ marginTop: '-10px' }} disabled={loading} value={currentSeasonName} onChange={(event) => handleSeasonChange(event.target.value)}>
                                     {seasons.map((season) =>
                                         <option key={season} value={season}>Season {season}</option>
                                     )}
@@ -78,8 +78,8 @@ export default function App() {
                         <Route exact path="/">
                             <Rankings loading={loading} players={players} />
                         </Route>
-                        <Route path="/maps">
-                            <Maps loading={loading} season={season} currentSeasonName={currentSeasonName} />
+                        <Route path="/stats">
+                            <Stats loading={loading} deadlyDuos={deadlyDuos} season={season} currentSeasonName={currentSeasonName} />
                         </Route>
                         <Route path="/player/:id" >
                             <Player loading={loading} players={players} />

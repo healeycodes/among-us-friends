@@ -5,3 +5,11 @@
 .active-link {
   text-decoration: underline;
 }
+
+@media screen and (max-width: 500px) {
+  .season-list {
+    display: block !important;
+    float: initial !important;
+    margin-top: 18px !important;
+  }
+}
