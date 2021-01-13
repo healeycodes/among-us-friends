@@ -12,7 +12,7 @@ export default function Rankings(props) {
 
             {players.map((player, i) => {
                 if (search !== '' && !player.name.includes(search)) {
-                    return
+                    return <></>
                 }
                 return <Summary key={i} player={player} i={i} history={-30} />
             })}

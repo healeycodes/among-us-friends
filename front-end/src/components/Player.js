@@ -13,7 +13,7 @@ export default function Player(props) {
         <div>
             {players.map((player, i) => {
                 if (player.name !== id) {
-                    return
+                    return <></>
                 }
                 return <Summary player={player} i={i} history={-30} />
             })}
