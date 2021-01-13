@@ -89,6 +89,9 @@ export default function App() {
                             <About />
                         </Route>
                     </Switch>
+                    {loading &&
+                        <img className="centered" style={{ opacity: .25, filter: 'grayscale(100%)' }} src="/imposter.png" />
+                    }
                 </main>
             </header>
         </Router>
