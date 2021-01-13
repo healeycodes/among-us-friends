@@ -6,9 +6,12 @@ import Summary from '../components/Summary'
 import { getMap } from '../Api'
 
 export default function Player(props) {
-    console.log(props)
-    const { players } = props
+    const { loading, players } = props
     const { id } = useParams()
+
+    if (loading) {
+        return <></>
+    }
 
     return (
         <div>

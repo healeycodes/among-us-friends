@@ -1,8 +1,11 @@
 import { getMap } from '../Api'
 
 export default function Stats(props) {
-    console.log(props)
-    const { season, deadlyDuos } = props
+    const { loading, season, deadlyDuos } = props
+    
+    if (loading) {
+        return <></>
+    }
 
     return (
         <div className="App">

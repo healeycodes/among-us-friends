@@ -3,7 +3,12 @@ import { useState } from "react"
 import Summary from '../components/Summary'
 
 export default function Rankings(props) {
-    const { players } = props
+    const { loading, players } = props
+
+    if (loading) {
+        return <></>
+    }
+
     const [search, setSearch] = useState('')
 
     return (
