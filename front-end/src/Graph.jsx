@@ -10,7 +10,6 @@ import {
     WithTooltip,
     PatternLines,
     BandLine,
-    HorizontalReferenceLine
 } from '@data-ui/sparkline'
 
 PatternLines.displayName = 'PatternLines'
@@ -33,8 +32,8 @@ const renderTooltip = (
     </div>
 )
 
-export default (props) => (
-    <>
+export default function Graph (props) {
+    return <>
         {(data => (
             <>
                 <WithTooltip renderTooltip={renderTooltip}>
@@ -85,4 +84,4 @@ export default (props) => (
             </>
         ))(props.data)}
     </>
-)
+}
