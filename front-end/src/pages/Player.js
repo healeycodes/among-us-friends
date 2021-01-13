@@ -13,16 +13,21 @@ export default function Player(props) {
         return <></>
     }
 
+    const player = players.find(player => player.name === id)
+    if (player === undefined) {
+        return <p>They didn't play this season.</p>
+    }
+
     return (
         <div>
             {players.map((player, i) => {
                 if (player.name !== id) {
                     return <></>
                 }
-                return <Summary player={player} i={i} history={-30} />
+                return <Summary player={player} i={i} history={0} />
             })}
             <div style={{ marginTop: '48px' }}>
-                {players.find(player => player.name === id).games.map(game => {
+                {player.games.map(game => {
                     const map = getMap(game.map)
                     return <div style={{ marginBottom: '24px' }}>
                         <div>{game.diff > 0 ? 'W' : 'L'} {game.diff > 0 ? "+" + game.diff : "" + game.diff} ({map})</div>

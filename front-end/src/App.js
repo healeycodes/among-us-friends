@@ -6,10 +6,10 @@ import {
     NavLink,
 } from "react-router-dom"
 
-import About from './components/About'
+import About from './pages/About'
 import Rankings from './pages/Rankings'
 import Player from './pages/Player'
-import Stats from './components/Stats'
+import Stats from './pages/Stats'
 import { getStats } from './Api'
 
 import 'water.css/out/light.css'
@@ -24,6 +24,7 @@ export default function App() {
         maps: [],
         seasons: []
     })
+    const [search, setSearch] = useState('')
 
     useEffect(() => {
         getStats('0')
@@ -76,7 +77,7 @@ export default function App() {
                 <main style={{ opacity: loading ? .5 : 1 }}>
                     <Switch>
                         <Route exact path="/">
-                            <Rankings loading={loading} players={players} />
+                            <Rankings loading={loading} players={players} search={search} setSearch={setSearch} />
                         </Route>
                         <Route path="/stats">
                             <Stats loading={loading} deadlyDuos={deadlyDuos} season={season} currentSeasonName={currentSeasonName} />

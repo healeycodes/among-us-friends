@@ -2,7 +2,7 @@ import {
     NavLink,
 } from "react-router-dom"
 
-import Graph from '../Graph'
+import Graph from './Graph'
 
 export default function Summary(props) {
     const { player, i, history } = props
@@ -21,7 +21,7 @@ export default function Summary(props) {
 
     const placements = games.length <= 10
     return <div style={{ opacity: placements ? .5 : 1 }}>
-        <div><small>{placements ? '#~' : `#${i + 1}`}</small> <NavLink to={`/player/${name}`}>{name}</NavLink></div>
+        <div><span style={{ fontWeight: 'bold' }}><NavLink to={`/player/${name}`}>{name}</NavLink> </span><small>{placements ? '#~' : `#${i + 1}`}</small></div>
         <div>crew — {crewWin}<small>W</small> {crewLoss}<small>L</small> {crewWinRate !== 'NaN' && `(${crewWinRate}%)`}</div>
         <div>imposter — {impostorWin}<small>W</small> {impostorLoss}<small>L</small> {impostorWinRate !== 'NaN' && `(${impostorWinRate}%)`}</div>
         <Graph data={_eloHistory} />

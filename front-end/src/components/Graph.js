@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { color } from '@data-ui/theme'
 
 import {
@@ -32,7 +30,7 @@ const renderTooltip = (
     </div>
 )
 
-export default function Graph (props) {
+export default function Graph(props) {
     return <>
         {(data => (
             <>
