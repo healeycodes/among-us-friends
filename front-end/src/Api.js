@@ -22,6 +22,6 @@ export async function getStats(seasonName) {
         players,
         season,
         seasons,
-        deadlyDuos
+        deadlyDuos,
     }
 }
