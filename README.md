@@ -21,11 +21,11 @@ Tech:
 
 It's a Jamstack application which runs Express via Netlify Lambda. Tested by Jest.
 
-The frontend is vanilla JS/CSS.
+The frontend is React via Create React App.
 
 <hr>
 
-![Win rates and loss rates, and an ELO graph](https://github.com/healeycodes/among-us-friends/blob/main/public/preview.png)
+![Win rates and loss rates, and an ELO graph](https://github.com/healeycodes/among-us-friends/blob/main/front-end/public/preview.png)
 
 <br>
 
@@ -34,12 +34,13 @@ The frontend is vanilla JS/CSS.
 
 Sheets should be named in the following format:
 
--   `Current` — the season in-progress
 -   `Season X` — where `X` is an incrementing integer starting at `1`
+
+To add a season, edit `seasons` inside `config.json`. Append to the list of incrementing integers.
 
 <br>
 
-![A Google Sheets file](https://github.com/healeycodes/among-us-friends/blob/main/public/sheets.png)
+![A Google Sheets file](https://github.com/healeycodes/among-us-friends/blob/main/front-end/public/sheets.png)
 
 Enter data starting at C4 downwards. The rows should be 14 cells long.
 
@@ -75,8 +76,8 @@ This application is deployed by Netlify.
 
 Set two environmental variables via the Netlify UI.
 
--   `SHEETS_ID` - the id in the URL bar.
--   `SHEETS_API_KEY` - an API key from Google Console.
+- `SHEETS_ID` - the id in the URL bar.
+- `SHEETS_API_KEY` - an API key from Google Console.
 
 <br>
 
@@ -84,18 +85,18 @@ Set two environmental variables via the Netlify UI.
 
 Set the following environmental variable:
 
--   `snapshot` - to `true`
+- `snapshot` - to `true`
 
 <br>
 
-Then run:
+Run both the back-end and the front-end.
 
-`npm i`
+`cd back-end/ && yarn install && yarn dev`
 
-`node server-local.js`
+`cd front-end/ && yarn install && yarn start`
 
 <br>
 
 ## Tests
 
-`npm test`
+`cd back-end/ && yarn test`

@@ -4,7 +4,7 @@ export default function About() {
             <p>
                 <b>How does the Elo work?</b>
                 <br />
-                Players have a hidden crew Elo and a hidden imposter Elo.
+                Players have a hidden crew Elo and a hidden impostor Elo.
                 Players are measured against the average of the other team. For
                 the first 30 games, players lose and gain more Elo (à la{" "}
                 <a href="https://ratings.fide.com/calculator_rtd.phtml">FIDE</a>

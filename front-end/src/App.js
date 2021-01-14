@@ -117,10 +117,10 @@ export default function App() {
                     </Switch>
                     {loading && (
                         <img
-                            alt="Among Us Imposter"
+                            alt="Among Us impostor"
                             className="centered"
                             style={{ opacity: 0.25, filter: "grayscale(100%)" }}
-                            src="/imposter.png"
+                            src="/impostor.png"
                         />
                     )}
                 </main>

@@ -3,6 +3,27 @@ import { useParams } from "react-router-dom"
 import Summary from "../components/Summary"
 import { getMap } from "../Api"
 
+function result(game) {
+    const map = getMap(game.map)
+    return (
+        <div style={{ marginBottom: "24px" }}>
+            <div>
+                {game.diff > 0 ? <span style={{ color: "green" }}>W</span> : <span style={{ color: "red" }}>L</span>}{" "}
+                {game.diff > 0
+                    ? "+" + game.diff
+                    : "" + game.diff}{" "}
+                <small>({map})</small>
+            </div>
+            <div>
+                <small>{game.impostors.sort().join(" ")}</small>
+            </div>
+            <div>
+                <small>{game.crew.sort().join(" ")}</small>
+            </div>
+        </div>
+    )
+}
+
 export default function Player(props) {
     const { loading, players } = props
     const { id } = useParams()
@@ -16,6 +37,9 @@ export default function Player(props) {
         return <p>They didn't play this season.</p>
     }
 
+    const crewGames = player.games.filter(game => game.crew.includes(player.name))
+    const impostorGames = player.games.filter(game => game.impostors.includes(player.name))
+
     return (
         <div>
             {players.map((player, i) => {
@@ -25,26 +49,17 @@ export default function Player(props) {
                 return <Summary player={player} i={i} history={0} />
             })}
             <div style={{ marginTop: "48px" }}>
-                {player.games.map(game => {
-                    const map = getMap(game.map)
-                    return (
-                        <div style={{ marginBottom: "24px" }}>
-                            <div>
-                                {game.diff > 0 ? "W" : "L"}{" "}
-                                {game.diff > 0
-                                    ? "+" + game.diff
-                                    : "" + game.diff}{" "}
-                                ({map})
-                            </div>
-                            <div>
-                                <small>{game.impostors.join(" ")}</small>
-                            </div>
-                            <div>
-                                <small>{game.crew.join(" ")}</small>
-                            </div>
-                        </div>
-                    )
-                })}
+                <div style={{ display: 'flex' }}>
+                    <div style={{ flex: 1 }}>
+                        <div style={{ marginBottom: '48px' }}>as crew</div>
+                        {crewGames.map(game => result(game))}
+                    </div>
+                    <div style={{ flex: 1 }}>
+                        <div style={{ marginBottom: '48px' }}>as impostor</div>
+                        {impostorGames.map(game => result(game))}
+                    </div>
+                    <div></div>
+                </div>
             </div>
         </div>
     )

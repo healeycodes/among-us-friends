@@ -42,7 +42,7 @@ export default function Summary(props) {
                 <small>L</small> {crewWinRate !== "NaN" && `(${crewWinRate}%)`}
             </div>
             <div>
-                imposter — {impostorWin}
+                impostor — {impostorWin}
                 <small>W</small> {impostorLoss}
                 <small>L</small>{" "}
                 {impostorWinRate !== "NaN" && `(${impostorWinRate}%)`}
