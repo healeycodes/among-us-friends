@@ -74,7 +74,7 @@ export default function Summary(props) {
                     </tr>
                 </table>
             </div>
-                <Graph data={_eloHistory} />
+            <Graph data={_eloHistory} />
         </div >
     )
 }
