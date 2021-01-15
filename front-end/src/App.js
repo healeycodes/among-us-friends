@@ -43,11 +43,16 @@ function App() {
     // Track page views
     const location = useLocation();
     useEffect(() => {
-        window
-            .goatcounter
-            .count({
-                path: location.pathname
-            })
+        const t = setInterval(function () {
+            if (window.goatcounter && window.goatcounter.count) {
+                clearInterval(t)
+                window
+                    .goatcounter
+                    .count({
+                        path: location.pathname
+                    })
+            }
+        }, 100)
     }, [location])
 
     const handleSeasonChange = current => {
