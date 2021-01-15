@@ -8,6 +8,7 @@ export default function Summary(props) {
         name,
         games,
         eloHistory,
+        elo,
         crewWin,
         crewLoss,
         impostorWin,
@@ -29,25 +30,47 @@ export default function Summary(props) {
 
     const placements = games.length <= 10
     return (
+
         <div style={{ opacity: placements ? 0.5 : 1 }}>
-            <div>
+            <div style={{ marginBottom: "-15px" }}>
+                <small>{placements ? "#~" : `#${i + 1}`}</small>{" "}
                 <span style={{ fontWeight: "bold" }}>
                     <NavLink to={`/player/${name}`}>{name}</NavLink>{" "}
                 </span>
-                <small>{placements ? "#~" : `#${i + 1}`}</small>
+                <small>{`(${elo})`}</small>
             </div>
-            <div>
-                crew — {crewWin}
-                <small>W</small> {crewLoss}
-                <small>L</small> {crewWinRate !== "NaN" && `(${crewWinRate}%)`}
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+            }}>
+                <style>{`
+            th, td {
+                padding: 0px;
+            }`}
+                </style>
+                <table>
+                    <tr>
+                        <th><small>team</small></th>
+                        <th><small>wins</small></th>
+                        <th><small>losses</small></th>
+                        <th><small>win rate</small></th>
+                    </tr>
+                    <tr>
+                        <td>😇</td>
+                        <td>{crewWin}</td>
+                        <td>{crewLoss}</td>
+                        <td>{crewWinRate !== "NaN" && `${crewWinRate}%`}</td>
+                    </tr>
+                    <tr>
+                        <td>👹</td>
+                        <td>{impostorWin}</td>
+                        <td>{impostorLoss}</td>
+                        <td>{impostorWinRate !== "NaN" && `${impostorWinRate}%`}</td>
+                    </tr>
+                </table>
+                <Graph data={_eloHistory} />
             </div>
-            <div>
-                impostor — {impostorWin}
-                <small>W</small> {impostorLoss}
-                <small>L</small>{" "}
-                {impostorWinRate !== "NaN" && `(${impostorWinRate}%)`}
-            </div>
-            <Graph data={_eloHistory} />
-        </div>
+        </div >
     )
 }
