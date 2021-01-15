@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom"
 
 import Graph from "./Graph"
+//import "../App.css"
 
 export default function Summary(props) {
     const { player, i, history } = props
@@ -45,14 +46,6 @@ export default function Summary(props) {
                     </span>
                     <small>{`(${elo})`}</small>
                 </div>
-                <style>{`
-                table {
-                    width: 300px;
-                }
-                th, td {
-                    padding: 0px;
-                }`}
-                </style>
                 <table>
                     <tr>
                         <th><small>team</small></th>

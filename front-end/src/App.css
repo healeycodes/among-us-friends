@@ -20,3 +20,11 @@
     margin-top: 18px !important;
   }
 }
+
+table {
+  width: 300px;
+}
+
+th, td {
+  padding: 0px;
+}
