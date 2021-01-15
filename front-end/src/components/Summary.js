@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom"
 
 import Graph from "./Graph"
-//import "../App.css"
 
 export default function Summary(props) {
     const { player, i, history } = props
