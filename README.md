@@ -19,9 +19,11 @@ Features:
 
 Tech:
 
-It's a Jamstack application which runs Express via Netlify Lambda. Tested by Jest.
+A Jamstack application which runs Express via Netlify Lambda.
 
-The frontend is React via Create React App.
+The front-end is React via Create React App.
+
+tested by Jest.
 
 <hr>
 
@@ -83,9 +85,7 @@ Set two environmental variables via the Netlify UI.
 
 ## Local Development
 
-Set the following environmental variable:
-
-- `snapshot` - to `true`
+Create a file called `.env` inside `back-end/` with the contents `snapshot=true`
 
 <br>
 

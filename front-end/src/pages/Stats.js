@@ -27,10 +27,10 @@ export default function Stats(props) {
                         ).toFixed(2)
 
                         return (
-                            <>
+                            <span key={name}>
                                 Crew win {percent}% of the time on {getMap(name)}.
-                        <br />
-                            </>
+                                <br />
+                            </span>
                         )
                     })}
                 </p>

@@ -1,4 +1,4 @@
-const { hidePlayers, seasons } = require("../../config.json")
+const { hidePlayers } = require("../../config.json")
 const EloRating = require("elo-rating")
 
 const PLACEMENT_GAMES = 10
@@ -62,7 +62,7 @@ function buildStats(data) {
     )
 
     // Overall season stats
-    let season = {
+    const season = {
         totalGames: data.values.length,
         mapData: {},
         duos: {},
@@ -91,7 +91,7 @@ function buildStats(data) {
         // Two player names
         let impostors = new Set(game.slice(10, 12))
         if (impostors.size < 2) {
-            console.error("Bad number of impostors", impostors.size)
+            console.error("Bad number of impostors", impostors)
             return
         }
 
@@ -235,7 +235,6 @@ function buildStats(data) {
     return {
         players: displayPlayers,
         season,
-        seasons,
         deadlyDuos,
     }
 }

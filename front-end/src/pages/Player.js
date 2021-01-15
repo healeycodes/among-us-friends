@@ -3,10 +3,10 @@ import { useParams } from "react-router-dom"
 import Summary from "../components/Summary"
 import { getMap } from "../Api"
 
-function result(game) {
+function result(game, i) {
     const map = getMap(game.map)
     return (
-        <div style={{ marginBottom: "24px" }}>
+        <div key={i} style={{ marginBottom: "24px" }}>
             <div>
                 {game.diff > 0 ? <span style={{ color: "green" }}>W</span> : <span style={{ color: "red" }}>L</span>}{" "}
                 {game.diff > 0
@@ -52,11 +52,11 @@ export default function Player(props) {
                 <div style={{ display: 'flex' }}>
                     <div style={{ flex: 1 }}>
                         <div style={{ marginBottom: '48px' }}>as crew</div>
-                        {crewGames.map(game => result(game))}
+                        {crewGames.map((game, i) => result(game, `crew-${i}`))}
                     </div>
                     <div style={{ flex: 1 }}>
                         <div style={{ marginBottom: '48px' }}>as impostor</div>
-                        {impostorGames.map(game => result(game))}
+                        {impostorGames.map((game, i) => result(game, `impostor-${i}`))}
                     </div>
                     <div></div>
                 </div>

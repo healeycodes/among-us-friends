@@ -8,48 +8,46 @@ const { seasons } = require("../../config.json")
 const snapshot = require("../dev-snapshot.json")
 const { buildStats } = require("./stats")
 
-router.get("/stats/:season", async (request, response) => {
-    const season = request.params.season
-    let query = `Season ${season}`
-    if (season === "0") {
-        query = `Season ${seasons[seasons.length - 1]}`
-    }
-
-    try {
-        const data = await sheetData(query)
-        const stats = buildStats(data)
-        response.json(stats)
-    } catch (error) {
-        console.error(error)
-    }
+router.get("/seasons", async (request, response) => {
+    response.json(seasons)
 })
 
-router.get("/raw-stats/:season", async (request, response) => {
-    // Make the league's raw data open for all!
-    const season = request.params.season
-    let query = ""
-    if (season !== "current") {
-        query = `Season ${parseInt(season)}`
-    }
-
-    try {
-        const data = await sheetData(query)
-        response.json(data)
-    } catch (error) {
-        console.error(error)
-    }
-})
-
-async function sheetData(sheet = "Current") {
+router.get("/stats", async (request, response) => {
     // For local dev set this variable
     if (process.env.snapshot === "true") {
-        return new Promise(resolve => resolve(snapshot))
+        return response.json(buildSeasons(snapshot))
     }
-    // Otherwise, we're on prod!
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${process.env.SHEETS_ID}/values/${sheet}!C4:Q1000?key=${process.env.SHEETS_API_KEY}`
-    return fetch(url)
-        .then(res => res.json())
-        .catch(err => err)
+
+    try {
+        const data = await sheetData()
+        response.json(buildSeasons(data))
+    } catch (error) {
+        console.error(error)
+    }
+})
+
+function buildSeasons(data) {
+    const allStats = data.map(season => buildStats(season))
+    const allSeasons = {}
+    seasons.forEach((season, i) => {
+        allSeasons[season] = allStats[i]
+    })
+    return allSeasons
+}
+
+async function sheetData() {
+    const seasonNames = seasons.map(number => `Season ${number}`)
+    return await Promise.all(
+        seasonNames.map(name =>
+            fetch(
+                `https://sheets.googleapis.com/v4/spreadsheets/${process.env.SHEETS_ID}/values/${name}!C4:Q1000?key=${process.env.SHEETS_API_KEY}`
+            )
+        )
+    )
+        .then(responses => {
+            return Promise.all(responses.map(response => response.json()))
+        })
+        .catch(error => console.log(error))
 }
 
 app.use("/.netlify/functions/app", router)
