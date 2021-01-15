@@ -32,7 +32,7 @@ export default function Summary(props) {
     return (
 
         <div style={{ opacity: placements ? 0.5 : 1 }}>
-            <div style={{ marginBottom: "-15px" }}>
+            <div>
                 <small>{placements ? "#~" : `#${i + 1}`}</small>{" "}
                 <span style={{ fontWeight: "bold" }}>
                     <NavLink to={`/player/${name}`}>{name}</NavLink>{" "}
@@ -41,14 +41,19 @@ export default function Summary(props) {
             </div>
             <div style={{
                 display: "flex",
-                justifyContent: "center",
-                alignItems: "center"
+                alignItems: "center",
+                flexWrap: "wrap",
+                marginTop: "-10px"
             }}>
                 <style>{`
-            th, td {
-                padding: 0px;
-            }`}
+                table {
+                    width: 300px;
+                }
+                th, td {
+                    padding: 0px;
+                }`}
                 </style>
+                
                 <table>
                     <tr>
                         <th><small>team</small></th>
