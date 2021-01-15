@@ -9,19 +9,12 @@ export function getMap(map) {
     return maps[map] || "Unknown map"
 }
 
-async function callStats(query) {
-    const response = await fetch(`/.netlify/functions/app/stats/${query}`)
+export async function getSeasons() {
+    const response = await fetch(`/.netlify/functions/app/seasons`)
     return await response.json()
 }
 
-export async function getStats(seasonName) {
-    const stats = await callStats(seasonName)
-    const { season, seasons, players, deadlyDuos } = stats
-
-    return {
-        players,
-        season,
-        seasons,
-        deadlyDuos,
-    }
+export async function getAllSeasonStats() {
+    const response = await fetch(`/.netlify/functions/app/stats`)
+    return await response.json()
 }

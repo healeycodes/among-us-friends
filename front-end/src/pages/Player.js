@@ -3,10 +3,10 @@ import { useParams } from "react-router-dom"
 import Summary from "../components/Summary"
 import { getMap } from "../Api"
 
-function result(game) {
+function result(game, i) {
     const map = getMap(game.map)
     return (
-        <div style={{ marginBottom: "24px" }}>
+        <div key={i} style={{ marginBottom: "24px" }}>
             <div>
                 <small>{game.role === "crew" ? "😇" : "👹"}</small>{" "}
                 {game.diff > 0 ? <span style={{ color: "green" }}>win</span> : <span style={{ color: "red" }}>loss</span>}{" "}
