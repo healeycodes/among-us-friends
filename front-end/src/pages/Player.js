@@ -8,7 +8,8 @@ function result(game, i) {
     return (
         <div key={i} style={{ marginBottom: "24px" }}>
             <div>
-                {game.diff > 0 ? <span style={{ color: "green" }}>W</span> : <span style={{ color: "red" }}>L</span>}{" "}
+                <small>{game.role === "crew" ? "😇" : "👹"}</small>{" "}
+                {game.diff > 0 ? <span style={{ color: "green" }}>win</span> : <span style={{ color: "red" }}>loss</span>}{" "}
                 {game.diff > 0
                     ? "+" + game.diff
                     : "" + game.diff}{" "}
@@ -37,9 +38,6 @@ export default function Player(props) {
         return <p>They didn't play this season.</p>
     }
 
-    const crewGames = player.games.filter(game => game.crew.includes(player.name))
-    const impostorGames = player.games.filter(game => game.impostors.includes(player.name))
-
     return (
         <div>
             {players.map((player, i) => {
@@ -49,16 +47,9 @@ export default function Player(props) {
                 return <Summary player={player} i={i} history={0} />
             })}
             <div style={{ marginTop: "48px" }}>
-                <div style={{ display: 'flex' }}>
-                    <div style={{ flex: 1 }}>
-                        <div style={{ marginBottom: '48px' }}>as crew</div>
-                        {crewGames.map((game, i) => result(game, `crew-${i}`))}
-                    </div>
-                    <div style={{ flex: 1 }}>
-                        <div style={{ marginBottom: '48px' }}>as impostor</div>
-                        {impostorGames.map((game, i) => result(game, `impostor-${i}`))}
-                    </div>
-                    <div></div>
+                <div style={{ flex: 1 }}>
+                    <div style={{ marginBottom: '30px' }}>game history</div>
+                    {player.games.map(game => result(game))}
                 </div>
             </div>
         </div>
