@@ -30,21 +30,21 @@ export default function Summary(props) {
 
     const placements = games.length <= 10
     return (
-
-        <div style={{ opacity: placements ? 0.5 : 1 }}>
+        <div style={{
+            opacity: placements ? 0.5 : 1,
+            display: "flex",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            paddingBottom: "15px"
+        }}>
             <div>
-                <small>{placements ? "#~" : `#${i + 1}`}</small>{" "}
-                <span style={{ fontWeight: "bold" }}>
-                    <NavLink to={`/player/${name}`}>{name}</NavLink>{" "}
-                </span>
-                <small>{`(${elo})`}</small>
-            </div>
-            <div style={{
-                display: "flex",
-                alignItems: "center",
-                flexWrap: "wrap",
-                marginTop: "-10px"
-            }}>
+                <div style={{ marginBottom: "-5px" }}>
+                    <small>{placements ? "#~" : `#${i + 1}`}</small>{" "}
+                    <span style={{ fontWeight: "bold" }}>
+                        <NavLink to={`/player/${name}`}>{name}</NavLink>{" "}
+                    </span>
+                    <small>{`(${elo})`}</small>
+                </div>
                 <style>{`
                 table {
                     width: 300px;
@@ -53,7 +53,6 @@ export default function Summary(props) {
                     padding: 0px;
                 }`}
                 </style>
-                
                 <table>
                     <tr>
                         <th><small>team</small></th>
@@ -74,8 +73,8 @@ export default function Summary(props) {
                         <td>{impostorWinRate !== "NaN" && `${impostorWinRate}%`}</td>
                     </tr>
                 </table>
-                <Graph data={_eloHistory} />
             </div>
+                <Graph data={_eloHistory} />
         </div >
     )
 }
