@@ -20,7 +20,7 @@ function EloChange(games) {
 }
 
 function getImpostorDuoTeamName(game) {
-    return game.slice(10, 12).sort().join(" ✕ ")
+    return game.slice(10, 12).sort().join(" & ")
 }
 
 // Given a raw list of matches in the form of a row of:
@@ -57,6 +57,10 @@ function buildStats(data) {
                     eloHistory: [1200],
                     games: [],
                     missStreak: 0,
+                    winStreaks: {
+                        current: 0,
+                        max: 0,
+                    },
                 }
             })
     )
@@ -67,6 +71,7 @@ function buildStats(data) {
         mapData: {},
         duos: {},
     }
+
     data.values.forEach(game => {
         const map = game[13]
         if (map !== undefined) {
@@ -139,6 +144,15 @@ function buildStats(data) {
             const wonGame =
                 (isCrew && winner === "crew") ||
                 (!isCrew && winner === "impostor")
+            if (wonGame) {
+                player.winStreaks.current += 1
+                player.winStreaks.max = Math.max(
+                    player.winStreaks.current,
+                    player.winStreaks.max
+                )
+            } else {
+                player.winStreaks.current = 0
+            }
             const eloChange = EloChange(player.eloHistory.length)
             let winDiff, lossDiff
 
@@ -233,8 +247,65 @@ function buildStats(data) {
     allDeadlies.sort((a, b) => b.winPercent - a.winPercent)
     const deadlyDuos = allDeadlies.length > 0 ? [allDeadlies.shift().name] : []
 
+    // Trophies
+    const trophies = {
+        // Everyone who played at least one game this season
+        veterans: displayPlayers.map(player => player.name),
+        // Highest crew Elo
+        bestCrew: null,
+        // Highest impostor Elo
+        bestImpostor: null,
+        // Most games played
+        mostGames: null,
+        // Players with 100+ games played
+        oneHundredGames: [],
+        // 1300+ players
+        thirteenHundreders: [],
+        // Winstreaks
+        winStreaks: {
+            5: [],
+            10: [],
+            15: [],
+        },
+    }
+    let highestCrewRating = -1
+    let highestImpostorRating = -1
+    let highestMostGames = -1
+    displayPlayers.forEach(player => {
+        if (player.crewElo > highestCrewRating) {
+            highestCrewRating = player.crewElo
+            trophies.bestCrew = player.name
+        }
+        if (player.impostorElo > highestImpostorRating) {
+            highestImpostorRating = player.impostorElo
+            trophies.bestImpostor = player.name
+        }
+        if (player.games.length > highestMostGames) {
+            highestMostGames = player.games.length
+            trophies.mostGames = player.name
+        }
+        if (player.games.length >= 100) {
+            trophies.oneHundredGames.push(player.name)
+        }
+        if (player.elo >= 1300) {
+            trophies.thirteenHundreders.push(player.name)
+        }
+        if (player.winStreaks.max >= 5) {
+            trophies.winStreaks["5"].push(player.name)
+        }
+        if (player.winStreaks.max >= 10) {
+            trophies.winStreaks["10"].push(player.name)
+        }
+        if (player.winStreaks.max >= 15) {
+            trophies.winStreaks["15"].push(player.name)
+        }
+    })
+    // 1st, 2nd, 3rd, etc.
+    trophies.podium = displayPlayers.slice(0, 3).map(player => player.name)
+
     return {
         players: displayPlayers,
+        trophies,
         season,
         deadlyDuos,
     }

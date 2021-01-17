@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom"
+import Twemoji from "react-twemoji"
 
 import Graph from "./Graph"
 
@@ -13,6 +14,7 @@ export default function Summary(props) {
         crewLoss,
         impostorWin,
         impostorLoss,
+        winStreaks,
     } = player
 
     const _eloHistory = eloHistory
@@ -30,43 +32,70 @@ export default function Summary(props) {
 
     const placements = games.length <= 10
     return (
-        <div style={{
-            opacity: placements ? 0.5 : 1,
-            display: "flex",
-            justifyContent: "center",
-            flexWrap: "wrap",
-            paddingBottom: "15px"
-        }}>
+        <div
+            className="player-summary"
+            style={{
+                opacity: placements ? 0.5 : 1,
+                display: "flex",
+                flexWrap: "wrap",
+                paddingBottom: "15px",
+            }}
+        >
             <div>
                 <div style={{ marginBottom: "-5px" }}>
-                    <small>{placements ? "#~" : `#${i + 1}`}</small>{" "}
-                    <span style={{ fontWeight: "bold" }}>
-                        <NavLink to={`/player/${name}`}>{name}</NavLink>{" "}
-                    </span>
-                    <small>{`(${elo})`}</small>
+                    <Twemoji>
+                        <small>{placements ? "#~" : `#${i + 1}`}</small>{" "}
+                        <span style={{ fontWeight: "bold" }}>
+                            <NavLink to={`/player/${name}`}>{name}</NavLink>{" "}
+                        </span>
+                        <small>
+                            {`(${elo})`}{" "}
+                            {winStreaks.current > 2 && (
+                                <span
+                                    title={`${winStreaks.current} wins in a row!`}
+                                >
+                                    🔥
+                                </span>
+                            )}
+                        </small>
+                    </Twemoji>
                 </div>
                 <table>
                     <tr>
-                        <th><small>team</small></th>
-                        <th><small>wins</small></th>
-                        <th><small>losses</small></th>
-                        <th><small>win rate</small></th>
+                        <th>
+                            <small>team</small>
+                        </th>
+                        <th>
+                            <small>wins</small>
+                        </th>
+                        <th>
+                            <small>losses</small>
+                        </th>
+                        <th>
+                            <small>win rate</small>
+                        </th>
                     </tr>
                     <tr>
-                        <td>😇</td>
+                        <td>
+                            <Twemoji>😇</Twemoji>
+                        </td>
                         <td>{crewWin}</td>
                         <td>{crewLoss}</td>
                         <td>{crewWinRate !== "NaN" && `${crewWinRate}%`}</td>
                     </tr>
                     <tr>
-                        <td>👹</td>
+                        <td>
+                            <Twemoji>👹</Twemoji>
+                        </td>
                         <td>{impostorWin}</td>
                         <td>{impostorLoss}</td>
-                        <td>{impostorWinRate !== "NaN" && `${impostorWinRate}%`}</td>
+                        <td>
+                            {impostorWinRate !== "NaN" && `${impostorWinRate}%`}
+                        </td>
                     </tr>
                 </table>
             </div>
-            <Graph data={_eloHistory} />
-        </div >
+            <Graph className="elo-graph" data={_eloHistory} />
+        </div>
     )
 }

@@ -2,6 +2,20 @@
   font-family: Inter, sans-serif;
 }
 
+img.emoji {
+  height: 1em;
+  width: 1em;
+  margin: 0 .05em 0 .1em;
+  vertical-align: -0.1em;
+}
+
+img.emoji-large {
+  height: 2em;
+  width: 2em;
+  margin: 0 .1em 0 .2em;
+  vertical-align: -0.2em;
+}
+
 .active-link {
   text-decoration: underline;
 }
@@ -13,7 +27,13 @@
   transform: translate(-50%, -50%);
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 780px) {
+  .player-summary {
+    justify-content: left;
+  }
+  .elo-graph {
+    margin-left: -40px;
+  }
   .season-list {
     display: block !important;
     float: initial !important;

@@ -1,7 +1,7 @@
 import { getMap } from "../Api"
 
 export default function Stats(props) {
-    const { loading, season, deadlyDuos } = props
+    const { loading, players, season, deadlyDuos } = props
 
     if (loading) {
         return <></>
@@ -9,13 +9,15 @@ export default function Stats(props) {
 
     return (
         <div className="App">
-            <p>{season.totalGames} games played.</p>
+            <p>
+                {season.totalGames} games played by {players.length} players.
+            </p>
             {deadlyDuos && (
                 <p>
                     Deadliest impostor duo is <i>{deadlyDuos}</i>.
                 </p>
             )}
-            {Object.keys(season.mapData).length > 0 &&
+            {Object.keys(season.mapData).length > 0 && (
                 <p>
                     <b>Maps</b>
                     <br />
@@ -28,13 +30,14 @@ export default function Stats(props) {
 
                         return (
                             <span key={name}>
-                                Crew win {percent}% of the time on {getMap(name)}.
+                                Crew win {percent}% of the time on{" "}
+                                {getMap(name)}.
                                 <br />
                             </span>
                         )
                     })}
                 </p>
-            }
+            )}
         </div>
     )
 }

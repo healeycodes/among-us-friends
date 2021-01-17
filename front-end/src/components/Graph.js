@@ -14,9 +14,9 @@ PatternLines.displayName = "PatternLines"
 
 const sparklineProps = {
     ariaLabel: "This is a Sparkline of...",
-    width: 500,
+    width: 400,
     height: 100,
-    margin: { top: 24, right: 64, bottom: 24, left: 64 },
+    margin: { top: 24, right: 32, bottom: 24, left: 40 },
     valueAccessor: d => d.y,
 }
 
@@ -30,7 +30,7 @@ const renderTooltip = ({ datum }) => (
 
 export default function Graph(props) {
     return (
-        <>
+        <div className={props.className}>
             {(data => (
                 <>
                     <WithTooltip renderTooltip={renderTooltip}>
@@ -80,6 +80,6 @@ export default function Graph(props) {
                     </WithTooltip>
                 </>
             ))(props.data)}
-        </>
+        </div>
     )
 }

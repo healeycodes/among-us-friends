@@ -1,0 +1,34 @@
+{
+    "manualTrophies": [
+        {
+            "player": "keita",
+            "icon": "🌟",
+            "description": "Most Improved Season 2"
+        },
+        {
+            "player": "neil",
+            "icon": "🌟",
+            "description": "Most Improved Season 3"
+        },
+        {
+            "player": "andy",
+            "icon": "👩‍💻",
+            "description": "Contributed Code"
+        },
+        {
+            "player": "roma",
+            "icon": "👩‍💻",
+            "description": "Contributed Code"
+        },
+        {
+            "player": "maxoys",
+            "icon": "👩‍💻",
+            "description": "Contributed Code"
+        },
+        {
+            "player": "ally",
+            "icon": "👩‍💻",
+            "description": "Contributed Code"
+        }
+    ]
+}

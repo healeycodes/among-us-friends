@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react"
-import {
-    Switch,
-    Route,
-    NavLink,
-    useLocation
-} from "react-router-dom"
+import { Switch, Route, NavLink, useLocation } from "react-router-dom"
 
 import About from "./pages/About"
 import Rankings from "./pages/Rankings"
@@ -23,7 +18,7 @@ function App() {
     const [currentSeason, setCurrentSeason] = useState("")
     const [stats, setStats] = useState({
         players: [],
-        maps: []
+        maps: [],
     })
     const [search, setSearch] = useState("")
 
@@ -41,18 +36,19 @@ function App() {
     }, [])
 
     // Track page views
-    const location = useLocation();
+    const location = useLocation()
     useEffect(() => {
-        const t = setInterval(function () {
+        const t = setInterval(function() {
             if (window.goatcounter && window.goatcounter.count) {
                 clearInterval(t)
-                window
-                    .goatcounter
-                    .count({
-                        path: location.pathname
-                    })
+                window.goatcounter.count({
+                    path: location.pathname,
+                })
             }
         }, 100)
+
+        document.body.scrollTop = 0
+        document.documentElement.scrollTop = 0
     }, [location])
 
     const handleSeasonChange = current => {
@@ -61,6 +57,11 @@ function App() {
     }
 
     const { players, deadlyDuos, season } = stats
+    const allTrophies = {}
+    Object.keys(allSeasonStats).forEach(s => {
+        allTrophies[s] = allSeasonStats[s].trophies
+    })
+
     return (
         <header>
             <nav style={{ paddingTop: "12px", marginBottom: "48px" }}>
@@ -71,17 +72,17 @@ function App() {
                     <li style={{ display: "inline", marginRight: "12px" }}>
                         <NavLink exact activeClassName="active-link" to="/">
                             Rankings
-                            </NavLink>
+                        </NavLink>
                     </li>
                     <li style={{ display: "inline", marginRight: "12px" }}>
                         <NavLink activeClassName="active-link" to="/stats">
                             Stats
-                            </NavLink>
+                        </NavLink>
                     </li>
                     <li style={{ display: "inline", marginRight: "12px" }}>
                         <NavLink activeClassName="active-link" to="/about">
                             About
-                            </NavLink>
+                        </NavLink>
                     </li>
                     {currentSeason !== "" && (
                         <li
@@ -96,9 +97,9 @@ function App() {
                                     handleSeasonChange(event.target.value)
                                 }
                             >
-                                {seasons.map(season => (
-                                    <option key={season} value={season}>
-                                        Season {season}
+                                {seasons.map(s => (
+                                    <option key={s} value={s}>
+                                        Season {s}
                                     </option>
                                 ))}
                             </select>
@@ -119,12 +120,17 @@ function App() {
                     <Route path="/stats">
                         <Stats
                             loading={loading}
+                            players={players}
                             deadlyDuos={deadlyDuos}
                             season={season}
                         />
                     </Route>
                     <Route path="/player/:id">
-                        <Player loading={loading} players={players} />
+                        <Player
+                            loading={loading}
+                            players={players}
+                            allTrophies={allTrophies}
+                        />
                     </Route>
                     <Route path="/about">
                         <About />
