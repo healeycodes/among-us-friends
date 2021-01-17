@@ -10,20 +10,28 @@ function result(game, i) {
     return (
         <div key={i} style={{ marginBottom: "24px" }}>
             <div>
-                <small>
-                    {game.role === "crew" ? (
-                        <Twemoji>😇</Twemoji>
+                <Twemoji>
+                    <small>
+                        {game.role === "crew" ? (
+                            <span>😇</span>
+                        ) : (
+                            <span>👹</span>
+                        )}
+                    </small>
+                    {" "}
+                    {game.diff > 0 ? (
+                        <span style={{ color: "green" }}>
+                            win
+                        </span>
                     ) : (
-                        <Twemoji>👹</Twemoji>
-                    )}
-                </small>{" "}
-                {game.diff > 0 ? (
-                    <span style={{ color: "green" }}>win</span>
-                ) : (
-                    <span style={{ color: "red" }}>loss</span>
-                )}{" "}
-                {game.diff > 0 ? "+" + game.diff : "" + game.diff}{" "}
-                <small>({map})</small>
+                        <span style={{ color: "red" }}>
+                            loss
+                        </span>
+                    )}{" "}
+                    {game.diff > 0 ? "+" + game.diff : "" + game.diff}
+                    {" "}
+                    <small>({map})</small>
+                </Twemoji>
             </div>
             <div>
                 <small>{game.impostors.sort().join(" ")}</small>
