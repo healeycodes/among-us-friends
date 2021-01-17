@@ -14,6 +14,7 @@ Features:
 
 -   Elo rankings (w/ graphs)
 -   Player pages
+-   Achievements/trophy system
 -   Seasons
 -   Google Sheets as a datastore
 
@@ -28,6 +29,10 @@ tested by Jest.
 <hr>
 
 ![Win rates and loss rates, and an ELO graph](https://github.com/healeycodes/among-us-friends/blob/main/front-end/public/preview.png)
+
+<br>
+
+![A player's trophy section](https://github.com/healeycodes/among-us-friends/blob/main/front-end/public/preview-trophies.png)
 
 <br>
 

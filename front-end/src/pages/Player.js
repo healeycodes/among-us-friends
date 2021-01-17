@@ -44,9 +44,6 @@ export default function Player(props) {
     }
 
     const player = players.find(player => player.name === id)
-    if (player === undefined) {
-        return <p>They didn't play this season.</p>
-    }
 
     return (
         <div>
@@ -55,26 +52,33 @@ export default function Player(props) {
                     <div style={{ marginTop: "96px", marginBottom: "30px" }}>
                         <b>trophies</b>
                     </div>
-                    <TrophyCase player={player} allTrophies={allTrophies} />
+                    <TrophyCase name={id} allTrophies={allTrophies} />
                 </div>
             </div>
             <div style={{ marginTop: "48px", marginBottom: "30px" }}>
                 <b>season summary</b>
             </div>
-            {players.map((player, i) => {
-                if (player.name !== id) {
-                    return <></>
-                }
-                return <Summary player={player} i={i} history={0} />
-            })}
-            <div style={{ marginTop: "48px", marginBottom: "30px" }}>
-                <div style={{ flex: 1 }}>
-                    <div style={{ marginBottom: "30px" }}>
-                        <b>game history</b>
+            {player !== undefined ? (
+                players.map((player, i) => {
+                    if (player.name !== id) {
+                        return <></>
+                    }
+                    return <Summary player={player} i={i} history={0} />
+                })
+            ) : (
+                <p>They didn't play this season.</p>
+            )}
+
+            {player !== undefined && (
+                <div style={{ marginTop: "48px", marginBottom: "30px" }}>
+                    <div style={{ flex: 1 }}>
+                        <div style={{ marginBottom: "30px" }}>
+                            <b>game history</b>
+                        </div>
+                        {player.games.map(game => result(game))}
                     </div>
-                    {player.games.map(game => result(game))}
                 </div>
-            </div>
+            )}
         </div>
     )
 }

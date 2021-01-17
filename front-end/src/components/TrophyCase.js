@@ -2,7 +2,7 @@ import { manualTrophies } from "../localConfig.json"
 import Twemoji from "react-twemoji"
 
 export default function TrophyCase(props) {
-    const { player, allTrophies } = props
+    const { name, allTrophies } = props
     const podium = ["🥇", "🥈", "🥉"]
     const seasons = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"]
 
@@ -10,63 +10,63 @@ export default function TrophyCase(props) {
     for (const season of Object.keys(allTrophies)) {
         const currentSeason = []
 
-        if (allTrophies[season].veterans.includes(player.name)) {
+        if (allTrophies[season].veterans.includes(name)) {
             currentSeason.push({
                 icon: seasons[parseInt(season) - 1],
                 description: `Participant Season ${season}`,
             })
         }
-        if (allTrophies[season].bestCrew === player.name) {
+        if (allTrophies[season].bestCrew === name) {
             currentSeason.push({
                 icon: "👮🏻‍♀️",
                 description: `Best Crew Season ${season}`,
             })
         }
-        if (allTrophies[season].bestImpostor === player.name) {
+        if (allTrophies[season].bestImpostor === name) {
             currentSeason.push({
                 icon: "🧛🏼‍♀️",
                 description: `Best Impostor Season ${season}`,
             })
         }
-        if (allTrophies[season].mostGames === player.name) {
+        if (allTrophies[season].mostGames === name) {
             currentSeason.push({
                 icon: "🕯",
                 description: `Most Games Season ${season}`,
             })
         }
-        if (allTrophies[season].oneHundredGames.includes(player.name)) {
+        if (allTrophies[season].oneHundredGames.includes(name)) {
             currentSeason.push({
                 icon: "💯",
                 description: `100+ Games Played ${season}`,
             })
         }
-        if (allTrophies[season].thirteenHundreders.includes(player.name)) {
+        if (allTrophies[season].thirteenHundreders.includes(name)) {
             currentSeason.push({
                 icon: "⛳️",
                 description: `1300+ Finish Season ${season}`,
             })
         }
         allTrophies[season].podium.forEach((place, index) => {
-            if (place === player.name) {
+            if (place === name) {
                 currentSeason.push({
                     icon: podium[index],
                     description: `Podium Finish Season ${season}`,
                 })
             }
         })
-        if (allTrophies[season].winStreaks["5"].includes(player.name)) {
+        if (allTrophies[season].winStreaks["5"].includes(name)) {
             currentSeason.push({
                 icon: "🔧",
                 description: `5 Wins in a Row Season ${season}`,
             })
         }
-        if (allTrophies[season].winStreaks["10"].includes(player.name)) {
+        if (allTrophies[season].winStreaks["10"].includes(name)) {
             currentSeason.push({
                 icon: "🛠",
                 description: `10 Wins in a Row Season ${season}`,
             })
         }
-        if (allTrophies[season].winStreaks["15"].includes(player.name)) {
+        if (allTrophies[season].winStreaks["15"].includes(name)) {
             currentSeason.push({
                 icon: "🔫",
                 description: `15 Wins in a Row Season ${season}`,
@@ -77,7 +77,7 @@ export default function TrophyCase(props) {
 
     const extraTrophies = []
     for (const trophy of manualTrophies) {
-        if (trophy.player === player.name) {
+        if (trophy.player === name) {
             extraTrophies.push({
                 icon: trophy.icon,
                 description: trophy.description,
