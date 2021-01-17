@@ -182,7 +182,6 @@ function buildStats(data) {
             const diff =
                 player.elo - player.eloHistory[player.eloHistory.length - 1]
             player.eloHistory.push(player.elo)
-            // const diff = wonGame ? winDiff : lossDiff
             player.games.unshift({
                 role: isCrew ? "crew" : "impostor",
                 crew: [...crew],
