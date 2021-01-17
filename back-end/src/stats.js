@@ -179,8 +179,10 @@ function buildStats(data) {
             // Inflate elo of in-game players to reward playing
             isCrew ? (player.crewElo += 0.5) : (player.impostorElo += 0.5)
             player.elo = Math.round((player.crewElo + player.impostorElo) / 2)
+            const diff =
+                player.elo - player.eloHistory[player.eloHistory.length - 1]
             player.eloHistory.push(player.elo)
-            const diff = wonGame ? winDiff : lossDiff
+            // const diff = wonGame ? winDiff : lossDiff
             player.games.unshift({
                 role: isCrew ? "crew" : "impostor",
                 crew: [...crew],
