@@ -32,10 +32,10 @@ describe("Test buildStats", () => {
 
         const firstGame = firstPlayer.games[firstPlayer.games.length - 1]
 
-        expect(firstGame.diff).toStrictEqual(20)
+        expect(firstGame.diff).toStrictEqual(10)
         expect(
             stats.players[9].games[stats.players[9].games.length - 1].diff
-        ).toStrictEqual(-20)
+        ).toStrictEqual(-10)
 
         expect(firstGame.crew.length).toStrictEqual(8)
         expect(firstGame.crew[0]).toStrictEqual("andy")
