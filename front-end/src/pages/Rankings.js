@@ -13,18 +13,23 @@ export default function Rankings(props) {
     )
 
     const sortByDropdown = (
-        <select
-            style={{ marginBottom: "48px" }}
+        <select required
+            style={{ marginBottom: "48px"
+        }}
             onChange={e => setSortBy(e.target.value)}>
+            <option value="" disabled selected hidden>Sort by</option>
             <option value="elo">Elo</option>
             <option value="games played">Games played</option>
             <option value="impostor win rate">Impostor win rate</option>
             <option value="crew win rate">Crew win rate</option>
+            <option value="win streak">Current win streak</option>
         </select>
     )
 
+    const filters = (<div style={{display: "flex"}}>{searchBar}{sortByDropdown}</div>)
+
     if (loading) {
-        return searchBar
+        return filters
     }
 
     players.sort((a, b) => {
@@ -35,6 +40,8 @@ export default function Rankings(props) {
                 return ((b.impostorWin / (b.impostorWin + b.impostorLoss)) * 100) - ((a.impostorWin / (a.impostorWin + a.impostorLoss)) * 100)
             case "crew win rate":
                 return ((b.crewWin / (b.crewWin + b.crewLoss)) * 100) - ((a.crewWin / (a.crewWin + a.crewLoss)) * 100)
+            case "win streak":
+                return b.winStreaks.current - a.winStreaks.current
             default:
                 return b.elo - a.elo
         }
@@ -45,10 +52,7 @@ export default function Rankings(props) {
 
     return (
         <div className="App">
-            <div style={{display: "flex"}}>
-                {searchBar}
-                {sortByDropdown}
-            </div>
+            {filters}
 
             {sortedPlayers.map((player, i) => {
                 if (search !== "" && !player.name.includes(search)) {

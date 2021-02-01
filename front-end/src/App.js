@@ -39,7 +39,7 @@ function App() {
     // Track page views
     const location = useLocation()
     useEffect(() => {
-        const t = setInterval(function() {
+        const t = setInterval(function () {
             if (window.goatcounter && window.goatcounter.count) {
                 clearInterval(t)
                 window.goatcounter.count({

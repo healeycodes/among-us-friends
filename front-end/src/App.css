@@ -48,3 +48,10 @@ table {
 th, td {
   padding: 0px;
 }
+
+select:invalid {
+  color: #999;
+}
+option {
+  color: black;
+}
