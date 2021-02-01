@@ -20,6 +20,7 @@ describe("Test buildStats", () => {
         const stats = buildStats(mockSheetsData)
         expect(stats).toHaveProperty("players")
 
+        stats.players.sort((a, b) => b.elo - a.elo)
         const firstPlayer = stats.players[0]
         expect(firstPlayer.crewLoss).toStrictEqual(0)
         expect(firstPlayer.crewWin).toStrictEqual(1)
