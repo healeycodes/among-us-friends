@@ -215,19 +215,6 @@ function buildStats(data) {
         })
     })
 
-    // Sort best to worst
-    let playersSortedByElo = Object.values(players).sort((a, b) => {
-        return b.elo - a.elo
-    })
-
-    // Segment those in their placements, move to end of the list
-    let placements = playersSortedByElo.filter(
-        p => p.games.length <= PLACEMENT_GAMES
-    )
-    playersSortedByElo = playersSortedByElo
-        .filter(p => p.games.length > PLACEMENT_GAMES)
-        .concat(placements)
-
     // Hide players who have requested to not be ranked
     let displayPlayers = playersSortedByElo.filter(
         p => hidePlayers.includes(p.name) === false
