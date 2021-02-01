@@ -216,7 +216,7 @@ function buildStats(data) {
     })
 
     // Hide players who have requested to not be ranked
-    let displayPlayers = playersSortedByElo.filter(
+    let displayPlayers = Object.values(players).filter(
         p => hidePlayers.includes(p.name) === false
     )
 
