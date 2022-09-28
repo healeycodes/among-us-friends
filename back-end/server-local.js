@@ -1,6 +1,6 @@
 const app = require("./src/app")
 
-// Mimic Netlify serving the `public` golder
+// Mimic Netlify serving the `public` folder
 const express = require("express")
 app.use(express.static("public"))
 
